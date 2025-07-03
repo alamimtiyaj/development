@@ -1,0 +1,79 @@
+What is Docker: Docker is an open plateform for developing, shipping and running applications.
+	Docker is a plateform which packages an application and all its dependecy together in the form of containers.
+
+What problem Docker Solve:
+	If you copy your project from one machine to another machine so the chances of dependecy mismatch due to which get the error so the solution is Docker.
+	Docker helps the package your code & dependecy and move to other environment.
+	
+DockerFile, Image and Container: 
+DockerFile: Text document which contains all the commands that a user can call on the command line to assemble an image.
+
+Docker Image: Template to create docker container.
+
+Container: Running insatnce of the docker image. Container hold entire package to run Application.
+
+Flow: 
+DockerFile ---Build ---> Docker Image ----> Run ----> Docker Container
+
+Download and Install: 
+prequisite: 
+1. Using WSL 2 backend or Hyper -V backend and Windows container
+
+1. Open cmd and run the command wsl --install
+2. Run the docker installer if ask then select wsl 2.
+Note: Check your window version- press window+r --> type winver , BIOS level virtualization should be enable --> Go to task manager -> perpormance -> go below and check virtualization should be enable.
+3. after installed open docker.
+
+Important command: 
+Check Docker version-Open cmd & type docker -v
+To create docker image: docker run hello-world    --> you will get msg hello-world unable to find locally so it will download from internet
+
+To check images: docker images 
+
+Install windows Terminal: go to microsoft store -> seach windows Terminal -> install
+
+Go to your docker folder and open Terminal or CMD
+
+1. Docker version: docker -v/docker --version
+2. Pull the image from Docker Hub: docker pull imageName  ex: docker pull openjdk
+3. To check images: docker images  
+4. If u wnat to download jdk 18: docker pull openjdk:18 --> 18 is a Tag it will download 18 version
+5. Search Image: docker search imageName   ex: docker search MySql
+6. Start images: docker run imageName  ex: docker run Python
+7. To check your container running: docker ps   -->will not show 
+									docker ps -a  --> see the satus
+8. To set environment during run: docker run --env or docker run --e
+9. To use detach flag : docker run --detach or docker run --d
+10. Give your container name & start in detach mode: docker run --name anyContainerName -d imageName/ImageId
+													 docker run --name pythonContainer -d 3a59e119f07d
+11. Run the docker in intractive(-it) mode: docker run --name pythonContainer1 -it -d python
+	Now you can see container is running using:  docker ps 
+12. You want to exceute you command for the image: docker exec -it containerId command
+													Ex: docker exec -it 8ef6c2ca463a python3
+		Now you in python you can run any command of Python --> print("This is testing");  
+		You can exit from cmd--> exit/exit()
+	Ex: docker run --name javaContainer -d openjdk
+		docker exec -it jshell
+		Sout("Hello Java testing");
+		jshell> /history --> check history which command you run
+		jshell> /exit    --> exit from container
+13. Inspect you container: docker inspect containerId
+14. Stop the container: docker stop containerName  ex: docker stop javaContainer
+						docker stop containerId    ex: docker stop 8ef6c2ca463a
+						docker stop statingDigit   ex: docker stop 8ef
+
+15. If u wnat to remove container from Run status : docker rm containerId1 containerId2 containerId3
+	Now can can see the status: docker ps -a
+16. Remove images: docker rmi openjdk:18
+17. If any container is running in intractive(-it) mode and u want restart: docker restart containerName   ex: docker restart pythonContainer1
+18. Stop container: docker stop pythonContainer1
+19. Push your code in DockerHub: docker login
+20. Create and save your Image: docker commit
+21. Push you docker image on dockerHub from local: docker push
+22. Copy file from loacl system: docker copy
+23. docker logs ex: docker logs conatinerName
+24. To create a volume so docker container store the data: docker volume
+25. Logout from docker Hub: docker logout
+26. To build the image: docker build -t imageName   ex: docker build -t springBoot 
+ 
+

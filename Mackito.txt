@@ -1,0 +1,74 @@
+The Mockito framework provides a variety of methods such as mock(), verify(), when(), etc., used to test Java applications. Using these predefined methods makes testing very easy.
+
+Mockito mock() method: It is used to create mock objects of a given class or interface. Mockito contains five mock() methods with different arguments. When we didn't assign anything to mocks, they will return default values. All five methods perform the same function of mocking the objects.
+
+	mock() method with Class:
+	mock() method with Answer:
+	mock() method with MockSettings:
+	mock() method with ReturnValues:
+	mock() method with String:
+
+Mockito when() method: It enables stubbing methods. It should be used when we want to mock to return specific values when particular methods are called. In simple terms, "When the XYZ() method is called, then return ABC." It is mostly used when there is some condition to execute.
+
+Mockito verify() method: The verify() method is used to check whether some specified methods are called or not. In simple terms, it validates the certain behavior that happened once in a test. It is used at the bottom of the testing code to assure that the defined methods are called.
+
+	verify() method:
+	verify() method with VerificationMode:
+	
+Mockito spy(): 
+
+Mockito reset(): 
+
+Mockito verifyNoMoreInteractions():
+
+Mockito verifyZeroInteractions():
+
+Mockito doThrow(): 
+
+Mockito doCallRealMethod(): 
+
+Mockito doAnswer(): 
+
+Mockito doNothing():
+
+Mockito doReturn():
+
+Mockito inOrder():
+
+Mockito ignoreStubs():
+
+Mockito times():
+
+Mockito never():
+
+Mockito atLeastOnce():
+
+Mockito atLeast():
+
+Mockito atMost():
+
+Mockito calls():
+
+Mockito only():
+
+Mockito timeout():
+
+Mockito after():
+
+Mockito validateMockitoUsage():
+
+Mockito withSettings():
+
+
+
+--------
+Junit -
+Swagger - 
+Sonarqube - to check code quality
+Postman - to test our API
+JWT - 
+
+Tools: Eclipse/VS code/netbeans, JUnit/Mockito, Maven, Postman, Swagger, Github/Bitbucket, Selenium, Jenkins/CICD, Docker, Sonarqube, JMeter, Splunk
+
+
+

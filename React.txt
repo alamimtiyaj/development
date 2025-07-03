@@ -1,0 +1,1277 @@
+Transport- kindly dial to the toll free no : 18001022843   ARFA TAziyan, Nausheen Naaz, Sadiq Basha H
+ES6 Feature:
+let objArr = [2,3,5,4,9,6]
+objArr.forEach(function (item) {
+    console.log(item);
+});
+objArr.map((item) => {
+    console.log(item);
+});
+
+diffeenece between var/let and useState: There will be no re-renders when we using var/let but when we use useSate there will be re-re-renders happens.
+When we create any variable using var/let it is assign in memory & no re-renders but useSate provide method setState to update the value & if any changes it will re-renders.
+React keeps track of changes made to state variables. When a change is detected, React automatically re-renders the DOM tree using a process called reconciliation. 
+
+Reconciliation : Reconciliation is the process through which React updates the Browser DOM and makes React work faster. React use a diffing algorithm so that component updates are predictable and faster.
+
+JavaScript:
+Es6:
+let & const keyword
+Arrow function
+spread operator(...)
+promises
+classes
+default parameters
+Rest parameters
+Destructuring Array
+Destructuring Object
+Lexical scope
+modules
+String.includes()
+String.startsWith()
+String.endsWith()
+Array.from()
+call(), apply() and bind()
+closure
+Asynchronous
+Async/await
+Hoisting
+difference between Call, Apply and Bind
+
+React:
+JSX, Bable
+Virtual DOM
+React Fragment
+controlled & uncontrolled component and Pure component
+composing component
+class & function component
+state and props
+life cycle of React
+Higher order component(HOC)
+ref, Rconciliation
+Hooks
+useState,useEffect, useContext, useRef, useReducer, useCallback,useMemo, 
+Axios/fetch
+Redux
+React 18 feature -
+
+let keyword : 
+
+find(): It will return the 1st value from the array.
+findIndex(): It will return the 1st value of index from the array.
+
+Arrow function: Arrow functions allow us to write shorter function syntax:
+	The handling of this is also different in arrow functions compared to regular functions.
+	In short, with arrow functions there is no binding of this.
+
+Lexical scope: Range of object. If you are going to this in function it will work but if you are going to in another function it will loose the own this. So better use Arrow function bcz it don't have own this it uses the parents.
+
+Rest Operator: It takes indifinte number of parameters and hold in form of array. it is define by ...a 
+Ex: function fruits(...a)
+	{
+		console.log("fruits", a)
+	}
+	fruits('apple','Mango','kiwi','orange')
+	
+Ex: function fruits(a,b,...x)
+	{
+		console.log("fruits", x)
+	}
+
+Promise: 
+
+Promise Type: A promise is an object that returns a value which you hope to receive in the future, but not now.
+It takes 2 code - Producing code and Consuming Code.
+State: Resolve and Reject
+resolve: If your promise is resolved so in this case .then() execute
+reject: If your promise is reject so in this case .catch() execute
+Why need promise: JavaScript is always synchronous and single threaded language. It means JavaScript never wait for code or function result when they take some time. JS directly execute next code.
+
+Promise chaining: If you resolving more then one promise that is called promise chaining.
+Ex: If you have any data on server so in this case we are resolving 2 promise.
+
+Finally keyword:  finally always execute either your promise will resolve or reject.
+
+Error handling with promise: 
+1. If you want to throw the error it will go into the catch block. ex: reject(new error("Data issue "));  or throw new error("Data Issue")
+2. If you want to use throw in resolve condition means in .then   ex: throw new error("Data Issue")
+ 
+1. promise.all: If all the promise resolve and it will give result after the last promise resolved. If any promise rejected it will go in catch block and not will tell how many are resolve and rejected.
+2. promise.allSetlled: It will give the result of every promises after the last promise resolved either that are resolve or rejected. 
+3. promise.any: Fulfills when any of the promises fulfills; rejects when all of the promises reject.
+4. promise.race: Which promise resolve or rejected 1st it will return that promise.
+
+New Global function: 
+1. isFinite(): if you pass number it will return true. Ex: isFinite(10) -> true, isFinite('a') -> false, isFinite(10/1) -> true,isFinite(10/0) -> false, isFinite(null) -> true
+2. isNaN(): It will return true if it is not a number. Ex: isNaN("Alam") -> true, isNaN(10) -> false, isNaN("101Alam") -> true, isNaN("101") -> false,
+isNaN(null) -> false,
+
+Destructuring Array: Unpacking the array inside the variable. It is based on index.
+Ex: let fruits= ['apple','Mango','kiwi','orange']
+	let[fruit1,'',fruit3,fruit4]=fruits
+	
+Ex: Destructuring with default value, 4 value is not available in array so it will take default
+	let fruits= ['apple','Mango','kiwi']
+	let[fruit1,'',fruit3,fruit4]=fruits
+	
+Ex: Destructuring with Rest operator
+	let fruits= ['apple','Mango','kiwi','orange']
+	let[fruit1,'',...fruit3]=fruits
+
+Destructuring Object: Unpacking the object inside the variable. It is based on key.
+Ex: let user={name:'Imtiyaj ALam',email:'almaimtiyaj96@gmail.com',mobile:99999}
+	let{email}=user
+
+Ex: Destructuring with default value, 
+	let user={name:'Imtiyaj ALam',email:'almaimtiyaj96@gmail.com',mobile:99999}
+	let{email,name,mob=8888}=user       // In this it will take default value & print email,name,mob=8888  and mobile gives undefined
+	let{email,name,mobile=8888}=user   //  In this it will print 99999 & print email,name,mobile=99999
+
+Ex: Destructuring with Rest operator: 
+	let user={name:'Imtiyaj ALam',email:'almaimtiyaj96@gmail.com',mobile:99999}
+	let{...email}=user  			// it will show all values
+	let{mobile, ...email}=user  	// In mobile it have only mobile and rest all will be in email
+
+Difference between Destructuring Array and Object: Array It is based on index. object It is based on key.
+
+Spread Operator: allows us to quickly copy all or part of an existing array or object into another array or object.
+Ex: let fruits=['apple','Mango','kiwi','orange']
+	function printAll(a,b,c)
+	{
+		console.log( a,b,c )
+	}
+	printAll (...fruits)
+	
+Ex: Spread Operator with Rest operator
+	function printAll(...a)  //rest
+	{
+		console.log( a )
+	}
+	printAll (...fruits)  //spred
+	
+Ex: Merge
+	let otherFruits=['pineapple','grapes']
+	let fruits=['apple','Mango',...otherFruits,'kiwi','orange']
+	
+Ex: Refrence break
+	let fruits=['apple','Mango','kiwi','orange']
+	let newFruits=fruits
+	newFruits.push('test')
+	console.log(newFruits) , console.log("old", fruits)  // In this case whatever u are adding in newFruits it will show in both (newFruits and fruits)
+	let newFruits=[...fruits]   // Write[...] like this so it will not copy the refrence
+	
+Exponentiation Operator(**): this is basiclly define the power.
+Ex: 2**3 //8
+	console.log(10**-2) //0.01
+	console.log(10**NaN) //NaN
+	console.log(2**3**2) //512  so 1st it will resolve 3**2 then 2**9
+	console.log(2**(3**2))  //512  so 1st it will resolve 3**2 then 2**9
+
+alternate soluntion: Math.pow(2,3)
+
+Module: Module allow to use the few or all code of different file. Only one default export we can do in one file and other are normal export.
+Install: Live server Ritwick Dey v5.6.1
+open: open file -> right click ->open with live server
+Ex: export default function User()   //export in one file
+	{
+		console.log( "Hello User");
+	}
+	
+	import User from './user.js'  // If your file is export default then no need to give bracket{} during importing
+	
+Ex: export  function otherUser()   //export in one file
+	{
+		console.log( "Hello User");
+	}
+	
+	import User,{otherUser as userO} from './user.js'  //import normal export funtion and change the name also
+
+Generators: A generator is a process that can be paused and resumed and can yield multiple values. define a generator function with function* symbol.
+The yield statement returns a value and pauses the execution of the function.
+define -> *, call -> create object and obj.next();
+Ex: function* forever() {
+    let index = 0;
+    while (true) {
+        yield index++;
+    }
+	}
+
+	let f = forever();
+	console.log(f.next()); // 0
+	console.log(f.next()); // 1
+	console.log(f.next()); // 2
+
+
+
+
+Prequisite:
+Node 18.0
+Visual Studio
+
+Goto File explorer folder -> open CMD -> type npx create-react-app my-app
+
+npm start - to start 
+crtl + c - to stop
+
+reactapplication
+18.2.0
+
+Prettier formatter
+ES7 React -> shortcut
+
+JSX: JSX stands for JavaScript XML. It is a syntax extension to JavaScript.
+	JSX is a preprocessor step that adds XML syntax to JavaScript.
+	JSX produces React "element". It is possible to create element without JSX but JSX makes React a lot more elegant.
+	It is recommended to use JSX with React to describe what the UI should look like. 
+	JSX is easier to read and write. Babel transform these expression into a actual JavaScript code.
+	It also allows React to show more useful error and warning message.
+
+Webpack: Webpack in react is a JavaScript module bundler that is commonly used with React to bundle and manage dependencies
+ 
+Bable: Babel is a JavaScript compiler that converts modern JavaScript code into a version compatible with all browsers
+
+React Fragment: Fragment is used to group a list of children without adding extra nodes to the DOM.
+Syntax:  <React.Fragment> </React.Fragment> or <>  </> or <Fragment> </Fragment>
+Advantage: return multiple elements and eleminates div tag
+
+Composing component: Component can refer to other components in their output. This lets us use the same component abstraction for any level of details.
+Syntex: <div> </div>
+
+Components: Components are the building blocks of any React app.
+			Components let you split the UI into independent, reusable pieces, and think about each piece in isolation.
+			Components are like JavaScript function. They accept arbitrary input(called "props") and return React elements describing what should appear on the screen.
+			Always start component name with a capital letter.
+
+Function components: It is a JavaScript function which accept a single "props" object argument with data and returns a React Element.
+Syntex 1:  function Student()
+		 {
+			return <h1> Hello React <h1>
+		 }
+		 
+Syntax 2:  const Student=()=>{ return <h1> Hello React <h1> }
+
+Class components: A class components require to extend from React.Component. The class must implement a render() member function which returns a React component to be rendered, similar to a return value of a functional component. In a class-based component, props are accessible via this.props.
+
+Syntax: class Student extends Component
+		{
+			return <h1> Hello React <h1> OR return <h1> Hello {this.props.name} <h1>
+		}
+		
+Rendering a Component:  ReactDOM.render(<Student/>, document.getElementById("root"));
+						ReactDOM.render(<Student name="Imtiyaj Alam"/>, document.getElementById("root"));
+	When React sees an element representing a user-define component, it passes JSX attributes to this component as a single object. We call this object "props".
+	
+Functional vs Class Component: Use functional components if you are writing a presentational component which doesn't have its own state or needs to access a lifecycle hook. You cannot use setState() in your component because Functional Components are plain JavaScript function.
+	Use Class components If you need state or need to access lifecycle  hook because all lifecycle hooks are coming from the React.Component which you extend from in class components.
+	
+Props: When React sees an element representing a user-define component, it passes JSX attributes to this components as a single object. We call this Object "props".
+Whether you declare a component as a function or a class, it must never modify its own props.
+All React components must act like pure function with respect to their props.
+
+Pure Components: Pure components are the components which render the same output for the same state and props. In function components, you can achieve these pure components through memoized React.memo() API wrapping around the component.This API prevents unnecessary re-renders by comparing the previous props and new props using shallow comparison.
+	When props or state changes, PureComponent will do a shallow comparison on both props and state by invoking shouldComponentUpdate() lifecycle method.
+	
+Note: React.memo() is a higher-order component.
+
+Pure Function: No modification in result
+Syntax: function sum(a,b)
+		{
+			return a+b;
+		}
+		
+Impure Function: modification in the result
+Syntax:  function withdraw(account, amount)
+		 {
+			account.total -= amount;
+		 }
+
+With Class component: access by this.props.name
+Syntax with functional:  function Student(props)
+		 {
+			return ( <div>
+					<h1> Hello, {props.name} <h1>
+					<h1> Hello, {props.roll} <h1>
+					</div>);
+		 }
+ReactDOM.render(<Student name="Imtiyaj Alam" roll="101"/>, document.getElementById("root"));
+ReactDOM.render(<Student name={"Imtiyaj Alam"} roll="101"/>, document.getElementById("root"));
+ReactDOM.render(<Student name="Imtiyaj Alam" roll={101+1}/>, document.getElementById("root"));
+
+Typechecking with propTypes: Validate the type of variable
+	To run typechecking on the props for a component, you can assign the special propTypes property.
+	
+Install package: npm start prop-types   --> version 15.7 
+Ex: import PropTypes from 'prop-types'
+	Student.propTypes={
+	name: PropTypes.string
+	};
+Note:  When an invalid value is provided for a prop, a warning will be shown in the JavaScript console.
+	For performance reason, propTypes is only checked in development mode.
+	
+Syntax: OptionalArray:PropsTypes.array;
+		OptionalBool:PropsTypes.bool;
+		OptionalNumber:PropsTypes.number;
+		OptionalFunc:PropsTypes.func;
+		OptionalObject:PropsTypes.object;
+		OptionalSymbol:PropsTypes.symbol;
+		
+Required: 
+Ex: import PropTypes from 'prop-types'
+	Student.propTypes={
+	name: PropTypes.string.isRequired
+	};
+
+Default Prop values: You can define values for your props by assiging to the special defaultProps property.
+Ex:  	Student.defaultProps={
+		name: 'GeekyShows'
+		};
+		
+Children in JSX: In JSX expression that contain both an opening tag and a closing tag, the content between those tags is passed as a special props: props.children.
+Ex:  <Student> I am child </Student>
+	props.children  // I am child 
+	
+Ex:  ReactDOM.render(<Student> I am child </Student>, document.getElementById("root"));  // access by {props.children} in functional component 
+	 ReactDOM.render(<Student> {100+2}</Student>, document.getElementById("root"));      // access by {this.props.children} in class component 
+
+Comment in JSX: {/*  .....  */}
+
+State:  State is similar to props, but it is private and fully controlled by the component. We can create state only in class component. It is possible to update the state/modify the state.
+There are two ways to intialize state in React Component:
+1. Directly inside class
+2. Inside the Constructor
+
+Access: this.state.name
+
+1. Directly inside class:
+Ex: Class Student extends Component
+	{
+		//States - here it is a class property
+		state = {
+			name: "Imtiyaj Alam"
+			prop1:this.props.prop1
+			}
+		rendor(){
+		}
+	}
+Note: The state property is referred as state. This is a class instance proprty.
+
+2. Inside the Constructor: When the component class is created, the constructor is the 1st method called, so it's the right place to add state.
+	The class instance has already been created in memory, so you can use this to set properties on it.
+	When we write a constructor, make sure to call the parent class constructor by super(props).
+	When you call super with props. React will make props availble across the component through this.props
+	
+Ex: class Student extends Component
+	{
+		constructor(props){
+		//It is required to call the parent class constructor
+		super(props)
+		//States
+		this.state={
+			name: "Imtiyaj Alam"
+			prop1:this.props.prop1
+			}
+		}
+		render(){
+		}
+		
+	}
+
+Event Handling: Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:
+	React events are named using camelCase, rather then lowecase.
+	With JSX you pass a function as the event handler,rather than a String.
+
+In HTML:
+	<button onclick="handleClick()"> Click Me </button>
+	
+In React: 
+	<button onClick={handleClick}> Click Me </button>    //Function Component
+	<button onClick={this.handleClick}> Click Me </button>    // Class Component
+	
+You cannot return false to prevent default behavior in React. You must call preventDefault explicitly.
+In HTML:
+	<a href="#" onclick="console.log('clicked.'); return false"> click me </a>
+	
+In React: 
+	function handleClick(e){
+	e.preventDefault();
+	console.log('clicked.');
+	}
+<a href="#" onclick={handleClick}> click me </a>
+
+Update state using setState(): setState() method is used to update states.
+Ex: this.state= {
+		name: "Imtiyaj"
+		}
+	// You can modify the value of state using the Event Handling so write the modify logic under the Event Handling
+	this.setState({name: "Alam"})
+	
+Update state: 
+	this.setState(function(state,props){
+	return {
+		};
+	});
+It accept a function rather than an object.
+It receives the previous state as the first argument.
+The props at the time the update is applied as the second argument.
+
+Passing arguments to Event Handlers: 
+. Arrow Function: 
+	<button onClick={(e)=> this.handleClick(id,e)}> Delete </button>
+	
+. Bind Method: 
+	<button onClick={this.handleClick.bind(this,id)}> Delete </button>
+	
+Note: In both cases, the w argument representing the React event will be passed as a second argument after the ID.
+With an arrow function, we have to pass it explictly, but with bind any further arguments are automatically forwarded.
+
+Ex: We should make a method(handleClickArg) which runs on the button click and that method(handleClickArg) calls the handleClick().
+ 1. Using Arrow function
+	<button onClick={this.handleClickArg}> Delete </button>
+	handleClickArg= ()=>{ this.handleClick(this.state.id); }
+	handleClick =(id)=> { 
+		console.log("button clicked", id);
+		};
+		
+2. If you want pass another arguments
+	<button onClick={this.handleClickArg}> Delete </button>
+	handleClickArg= (e)=>{ this.handleClick(this.state.id,"101", e); }
+	handleClick =(id,j,e)=> { 
+		console.log("button clicked", id,j,e);
+		};
+		
+3. Using annonymous function
+	<button onClick={(e)=>{ this.handleClick(this.state.id,"101", e); }}> Delete </button>
+	handleClick =(id,j,e)=> { 
+		console.log("button clicked", id,j,e);
+		};
+		
+4. Using Bind
+	<button onClick={this.handleClick.bind(this,this.state.id)}> Delete </button>
+	handleClick =(id,e)=> { 
+		console.log("button clicked", id,e);
+		};
+
+Phases of Component: 
+1. Mounting: Mounting is the process of creating an element and inserting it in a DOM tree.
+2. Updating: Updating is the process of changing state or props of component and update changes to node already in the DOM.
+3. Unmounting: Unmounting is the process of removing components from the DOM.
+4. Error Handling: These are used when there is error during rendering, in lifecycle method or in the constructor of any child component.
+
+1. Mounting: 
+	constructor()
+	getDerivedStateFromProps()
+	render()
+	componentDidMount()
+
+2. Updating:
+	getDerivedStateFromProps()
+	shouldComponentUpdate()
+	render()
+	getSnapshotBeforeUpdate()
+	componentDidupdate
+
+3. Unmounting:
+	componentWillUnmount()
+	
+Hooks: Hooks are function that let you "hook into" React state and lifecycle features from function components.
+	Hooks allow you to use React without classes. It means you can use state and other React features without writing a class.
+	React provides a few built-in Hooks like useState, useEffect, etc.
+	Hooks are new addition in React 16.8.
+	
+When use hooks: If you write fuction component and realize you need to add some state to it.
+
+Rules of Hooks: 
+. Only call Hooks at the top level- We should not call Hooks inside loops, conditions, or nested functions. Instead, always use Hooks at the tops level of your React function.
+. Only call Hooks from React functions - We should not Hooks from regular JavaScript functions. Instead, call Hooks from React function components or call Hooks from custom Hooks.
+. React relies on the order in which Hooks are called.
+. Hooks don't work inside classes.
+
+useState(): useState is Hook that allows you add React state to function Components. We call it inside a function component to add some local state to it. useState returns a pair - the current state value and a function that lets you update it. React will preserve this state between re-renders.
+You can call this fuction from an event handler or somewhere else.
+
+Declaring State: 
+Ex: import React,{useState} from 'react';
+	const nameStateVariable = useState("Imtiyaj")  // declaring state variable
+	const[name,setName] = useState("Imtiyaj")
+
+When we declare a state variable with useState, it returns a pair- an array with two item. So, by writing square bracket we are doing Array Destructuring.
+	const nameStateVariable = useState("Imtiyaj")
+	. The 1st item is the current value.
+	. The 2nd is a function that lets us update it.
+
+const name=nameStateVariable[0];  //1st item of array
+const setName= nameStateVariable[1];   // 2nd item of array
+
+Note: You can call useState as many times as you want.
+
+Accessing State: In a function, we can use state variable directly.
+Ex: <h1> My name is  {name} </h1>
+
+Updating State: write under any event handler like handleClick.
+Ex: setName("Alam");
+
+Effect Hooks: The Effect Hook lets you perform side effects in function components. Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.
+
+UseEffect():useEffect is a hook for encapsulating code that has 'side effects', if you are familiar with React class lifecycle methods, you can think of useEffect hook as componentDidMount,componentDidupdate, componentWillUnmount combined.
+Ex: import React,{useEffect} from 'react'
+	useEffect(Function)
+	useEffect(Function,array)
+	. The function passed to useEffect will run after the render is committed to the screen.
+	. Second argument to useEffect that is the array values that the effect depends on .
+Note: You can call useEffect as many times as you want.
+
+ex: useEffect(()=>{
+		console.log("Hello useEffect");
+		});
+		
+	useEffect(()=> {
+		console.log("Hello useEffect");
+		},[count]);     //It means it will run only for count state
+		
+What does useEffect do: By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed and call it later after performing the DOM updates. In this effect, we set the document title, we could also perform data fetching or call some other imperative API.
+
+Why is useEffect called inside a component: Placing UseEffect inside the component lets us access the state variable or any props right from the effect.
+
+Does useEffect run after every Render: Yes! By default, It runs both after the 1st render and after every update.
+
+Custom Hooks: A custom hooks is a JavaScript function, when we want to share logic between two JavaScript functions, we extract it to a third function.
+Building your own hooks lets you know extract component logic into reusable function.
+You can write custom hooks that cover a wide range of use case like form handling, animation, declrative subscription, timers and many more.
+
+Creating Custom Hooks: A custom hook is a JavaScript function whose name start with "use" and that many call other hooks.
+Ex:  const data= useSomething();
+	const[count,setCount] = useState(0)
+	handleIncrement=()=>{ setCount(count+1) };
+	return { count, handleIncrement };
+	useSomething() it will retrun some value like function count, handleIncrement.
+	You can access using the data variable like data.count, data.handleIncrement
+	
+Conditional Rendering: Conditional Rendering works the same way conditions work in JavaScript.
+	Use JavaScript operators like if or the conditional(ternary) operator to create elements representing the current state, and let React update the UI to much them.
+	if and if-else statements don't work inside JSX. This is because JSX is just syntactic sugar for function calls and object construction.
+	
+<div id={if(condition) {'msg'}}> Hello </div>
+
+
+React.createElement("div",{id:if(condition) {'msg'}}, "Hello");
+Some more......
+
+IIFE: In React, we use curly brace to wrap an IIFE, put all the logic you want inside it(if/else, switch,ternary operators etc) and return whatever you want to render.
+Syntax:  return(
+			<div>
+			  {
+				( ()=> {
+					// your code
+				} ) ()   //this () is self calling
+			  }
+			</div>
+		);
+
+List in React: You can build collections of elements and include them in JSX using curly braces {}. const arr=[10,20,30,40]
+
+state= {
+		users: [
+				{ id:101, name:"Rahul", password: "1234"},
+				{ id:102, name:"Imtiyaj", password: "1234"},
+				{ id:103, name:"Alam", password: "1234"},
+				];
+			isLoggedIn : false
+		};
+
+Iteration using map() method: The map() method creates a new array with the results of calling a provided function on every element in the calling array.
+Map calls a provided callback function once for each element in an array, in order, and retruns new array from the results.
+Syntax:  map(callback(cuurentValue, indexArray), thisArg)
+
+//Declration and initialization of array	
+		const arr=[10,20,30,40]
+		
+		//using array map method
+		const newArray = arr.map(num => {
+			return <li> {num* 2}  </li>
+		});
+		
+If you have object in state so we can retrieve the data 
+	state={
+	users: [
+		{ id:101, name:"Rahul", password: "1234"},
+		{ id:102, name:"Imtiyaj", password: "1234"}
+	], isLoggedin:false
+	};
+
+	const newUsers = this.state.users.map(user => {
+		return (
+		<h1> Id: {user.id} , Name: {user.name}, Password: {user.pass} </h1
+		);
+	});
+	return <div> {newUsers } </div> 
+
+Keys in React: It is required in listing element either you will get a warning.
+. A "key" is a special string attribute you need to include when creating list of elements.
+Keys help React identify which item have changed, are added, or are removed.
+Keys should be give to the elements inside the array to give the elements a stable identity.
+The best way to pick a key is to use a string that uniquely identifies a list item among its siblings.
+Most often you would use IDs from your data as Keys.
+Keys used within arrays should be unique among their siblings. However, they don't need to be globally unique. we can use the same keys when we produces two different array.
+Keys serve as a hint to React but they don't get passed your components.
+If you need the same value in your component, pass it explicitly as a prop with a different name. 
+
+
+Styling component Inline style in React:
+
+
+Styling component External style in React:
+
+Styling component CSS Module in React: 
+
+How to use Bootstrap in React:
+
+Form in React: HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state.
+In HTML, Form element such as <input>, <textarea> and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only update with setState().
+. Controlled Component
+. Uncontrolled Component
+
+. Controlled Component: Form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it's convenient to have a JavaScript fuction that handles the submission of the form and has access to the data that the user entered into form. The Standard way to achieve this is with a technique called "Controlled Components".
+
+When use Controlled Component: You need to write an event handler for every way your data can change and pipe all of the input state through a React component.
+
+. Uncontrolled Component: In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
+To write an uncontrolled component, instead of writing an event handler for every state update, you can use a "ref" to get form values from the DOM.
+
+When use Uncontrolled Component:You do not need to write an event handler for every way your data can change and pipe all of the input state through a React component.
+Converting a preexisting codebase to react, or integrating a React application with a non-React library.
+
+
+Controlled component in React: If you have any Textarea so for that you need to create a method handleChange() and in this method you need to change the state.
+Ex: <input type="text" value={this.state.value} onChange={this.handleChange}/>
+	handleChange =(e) =>{
+	this.setState({value:e.target.value})   // value:e.target.value.toUpperCase().substr(0,15) insert only capital letter and accept 15 letter.
+	}; 
+
+Controlled component Textarea in React: 
+Ex: <input type="textarea" value={this.state.value} onChange={this.handleChange}/>
+	handleChange =(e) =>{
+	this.setState({value:e.target.value})   // value:e.target.value.toUpperCase().substr(0,15) insert only capital letter and accept 15 letter.
+	}; 
+	
+Controlled component with multiple Input Elements: 1st way if have multiple field so you create handler for that and 2nd way to add one more parameter as name in input tag. 
+Ex:  <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+	 <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
+	 handleChange =(e) =>{
+	this.setState({[e.target.name]:e.target.value})   //e.target.name the name property already define in input tag
+	//If you wants password will take as capital letter
+	//const value= e.target.name=== "password" ? e.target.value.toUpperCase():e.target.value;
+	//this.setState({[e.target.name]:value})
+	};
+
+Handling Form in React: 
+Ex: <form onSubmit={this.handleSubmit}>
+	Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+	Password:  <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
+	handleChange =(e) =>{
+	this.setState({[e.target.name]:e.target.value})   //e.target.name the name property already define in input tag
+	};
+	handleSubmit =(e)=>{
+	console.log(e.target[1].name)
+	e.preventDefault();
+	};
+
+Uncontrolled Component:
+refs: Refs provide a way to access DOM nodes or React elements created in the render method.
+
+When to use Refs: 
+Managing focus,text selection, or media playback.
+Triggering imperative animation.
+Integrating with third-party DOM libraries.
+
+Creating Refs: Refs are created using React.createRef() and attached to React elements via the ref attribute.
+Refs are commonly assigned to an instance property when a component is constructed so they can be referenced throughout the component.
+//Create a ref to store the DOM element
+	this.myRef=React.createRef();
+	render(){
+	//Attaching created reff to react element
+	retrun<div ref={this.myRef} />;
+	}
+	
+Accessing Refs:When a ref is passed to an element in render, a refernce to the node becomes accessible at the current attribute of the ref.
+	const node=this.myRef.current;
+React will assign the current property with the DOM element when the component mounts,and assign it back to null when it unmounts. 
+
+	The value of the ref differs depending on the type of node: 
+When the ref attribute is used on an HTML element, the ref created in the constructor with React.createRef() receives the underlying DOM element as its current property. 
+When the ref attribute is used on a custom class component, the ref object receives the mounted instance of the component as its current.
+You may not use the ref attribute on function component because they don't have instances.
+
+Ex: Create a ref in constructor and write a code for focus the input text tag and give that ref to the input text tag.
+	constructor(props){
+	super(props);
+	this.textInput= React.createRef();   //Createing a ref
+	}
+	componentDidMount =() =>{
+		this.textInput.current.focus();   //focus the tag
+	};
+	
+	<form> Name: <input type ="text" />
+	Password: <input type ="password" ref={this.textInput} />    // focus this tag
+	
+Ex 2:  If you write anything input text tag that will show in your page
+	constructor(props){
+		super(props);
+		this.state={
+		value: ""
+		}
+		this.textInput= React.createRef();   //Createing a ref
+	}
+	handleSubmit =(e)=>{
+	e.preventDefault();
+	this.setState({value: this.textInput.current.value})
+	};
+	<> <h2> you typed: {this.state.value} </h2>
+	<form onSubmit={this.handleSubmit}> Name: <input type ="text" ref={this.textInput}/>
+	<input type ="submit" name="Submit"/>
+	
+Callback Refs: React also support another way to set refs called "callback refs", which gives more fine- grain control over when refs are set and unset. 
+Instead of passing a ref attribute created by createRef(), you pass a function. The function receives the React component instance or HTML DOM element as its argument, which can be stired and accessed elsewhere.
+Ex: constructor(props){
+	super(props);
+	this.backRef= null;   //Createing a ref
+	this.setBackRef= element => {
+		this.backRef=element;
+		};
+	}
+	componentDidMount =() =>{
+		if(this.backRef) {  
+		this.backRef.focus();   //focus the tag
+	};
+	<form> Name: <input type ="text" />
+	Password: <input type ="password" ref={this.setBackRef} />    // focus this tag
+	
+Lifting State Up in React: You can use state in one file and in other file you will get as props.
+
+Context API: 
+Context: Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+In a typical React application, data is passed top-down (parent to child ) via props, but this can be cumbersome/difficult for certain types of props that are required by many components within an application.
+. Passing the initial state to React.createContext. This function then returns an object with a provider and a consumer.
+. Using the Provider component at the top of the tree and making it accept a prop called value. This value can be anything!
+. Using the Consumer component anywhere below the Provide in the component tree to get a subset of the state.
+
+Create Context: It creates a Context object.
+When React renders a component that subscribes to this Context object it will read the current context value from the closest matching Provider above it in the tree. 
+Syntax: 
+	Const MyContext=React.createContext(defaultValue);
+	defaultValue: It is only used when a component does not have a matching Provider above it in the tree.
+Ex:
+	const MyContext= React.createContext(false);
+	const MyContext= React.createContext('whilte');
+	const MyContext= React.createContext({user:'Guest'});
+	
+Context Provider: Every Context object comes with a Provide React component that allow consuming components to subsribe to context changes.
+One Provider can be connected to many consumers. Providers can be nested to override values deeper within the tree.
+Syntax: 
+	<MyContext.Provider value={/* some Value */}
+	A value prop to be passed to consuming component that are descendants of this Provider.
+Ex: 
+	<MyContext.Provider value={this.state.name}
+	
+Context Consumer: A React component that subscribes to context changes. This lets you subsribe to a context within a function component.
+It requires a function as a child. The function receives the current context value and returns a React node.
+The value argument passed to the function will be equal to the value prop of the closest Provider for this context above in the tree.
+
+If there is no Provider for this context above, the value argument will be equal to the defaultValue that was passed to createContext().
+
+Syntax: 
+	<MyContext.Consumer> {value => /* render something based on the context value */}
+	</MyContext.Consumer>
+	
+Ex 1: If you want to pass your state from parent(app.js) to grandChild(guest.js) 
+App.js:	export const MyContext= React.createContext();
+		state={
+		name: Imtiyaj, value: 10
+		};
+	return(
+		<MyContext.Provider value={this.state.name}>   //you can pass whole state also this.state
+		</MyContext.Provider>
+	);
+	
+guest.js  import {MyContext} from './app.js'
+		return(
+			<> <h3> Guest Component </h3>
+			<MyContext.Consumer> {
+			data => <h4> {data} <h4>   // you can get the vlaue using data.name, data.value
+			}
+			</MyContext.Consumer>  <>
+		);
+		
+Ex 2: Changing the state and passing to consumer
+
+	handleClickContext =() => {
+		this.setState({value: this.state.value + 1})
+	};
+	
+	const contextValue ={
+		data: this.state,
+		handleClick: this.handleClickContext
+	}
+	<MyContext.Provider value={contextValue}>   
+	</MyContext.Provider>
+	
+	<MyContext.Consumer> {
+		({data, handleClick }) =>  (
+		<> <h4> Name: {data.name} value: {data.value} </h4>
+		<button onclick ={handleClick}> Change vlaue </button>  <>
+	)}
+	</MyContext.Consumer> 
+	
+Ex 3: We can reduce our code using to keep our create context, provider and consumer in one file and where you want to use you just import and use it.
+context.js:
+	const MyContext=React.createContext();
+	export const Provider= MyContext.Provider;
+	export const Consumer= MyContext.Consumer;
+	wherever you are useing <MyContext.Provider> you can use Provide and for <MyContext.Provider> you can use Consumer.
+	
+Note: While createing the Context and you pass any default value and if you don't have Provider so in this case deffault value will be show or active.
+
+Context Type: The ContextType property on a class can be assigned a Context object created by React.createContext(). This lets you consume the nearest current value of that Context Type using this.context.
+Syntax: 
+	static contextType=MyContext;
+	
+Ex: Using ContextType whatever you have written in Consumer you can create contextType and use it.
+	const MyContext=React.createContext();
+	export const Provider= MyContext.Provider;
+	
+Guest.js:
+	static contextType = MyContext  // Create contextType and define with your context which you created.
+	<> <h3> Guest Component </h3> 
+	<h4> Name: {this.contextType.data.name} value: {this.contextType.data.value} </h4>   // you can access directly using this.contextType.data...
+	<button onclick ={handleClick}> Change vlaue </button> 
+	 <>
+
+High Order Component: A Higher-Order Component(HOC) is an advanced technique in React for reusing component logic.
+HOCs are common in third party libraries.
+A HOC is function that takes a component and retruns a new component.
+EX: React.memo() is a higher-order component.
+Syntax: 
+	const EnhancedComponent = higherOrderComponent(WrappedComponent);
+	
+Ex: 
+	const FacebookJob = withLanguage(ReactJS)
+	const army = withArm(Men) { training }
+	const army = (Men) => { training }
+	
+	
+Redux: It is use for reusable state. It overcome the Lifting state and Context API.
+Add extension in Redux: Redux DevTools offered by Redux DevTools
+Link: https://redux-toolkit.js.org/tutorials/quick-start
+Redux Installation using create React App with Plain JavaScript : It will install thr Redux and create folder structure as well.
+
+	npx create-react-app my-app --template redux
+	
+Version: @reduxjs/toolkit: 1.6.1 , react-redux: 7.2.4
+
+Redux Installation in an Existing Application:
+1. create React application 
+	npx create-react-app react-redux-course
+
+2. Open terminal and install Redux 
+	npm install @reduxjs/toolkit
+	npm install react-redux
+	
+3. Create features folder 
+
+4. Create a Redux Store: Create a file named src/app/store.js. Import the configureStore API from Redux Toolkit. We'll start by creating an empty Redux store, and exporting it:
+	import { configureStore } from '@reduxjs/toolkit'
+
+	export const store = configureStore({
+	  reducer: {},
+	})
+	
+5. Provide the Redux Store to React: Once the store is created, we can make it available to our React components by putting a React-Redux <Provider> around our application in src/index.js. Import the Redux store we just created, put a <Provider> around your <App>, and pass the store as a prop:
+	import { store } from './app/store'
+	import { Provider } from 'react-redux'
+	
+	<Provider store={store}>
+    <App />
+   </Provider>,
+
+6. Create a Redux State Slice: Add a new file named src/features/counter/counterSlice.js. In that file, import the createSlice API from Redux Toolkit
+	Creating a slice requires a string name to identify the slice, an initial state value, and one or more reducer functions to define how the state can be updated. Once a slice is created, we can export the generated Redux action creators and the reducer function for the whole slice.
+	
+	import { createSlice } from '@reduxjs/toolkit'
+
+	const initialStateValue = {
+	  value/count: 0,
+	}
+
+	export const counterSlice = createSlice({
+	name: 'counter',
+	initialState: initialStateValue,
+	reducers: {
+		increment: (state) => {
+		  
+		  state.value += 1
+		},
+		decrement: (state) => {
+		  state.value -= 1
+		},
+		incrementByAmount: (state, action) => {
+		  state.value += action.payload
+		},
+	  },
+		})
+
+		// Action creators are generated for each case reducer function
+		export const { increment, decrement, incrementByAmount } = counterSlice.actions
+
+		export default counterSlice.reducer
+		
+7. Add Slice Reducers to the Store: we need to import the reducer function from the counter slice and add it to our store. By defining a field inside the reducer parameter, we tell the store to use this slice reducer function to handle all updates to that state.
+	import counterReducer from '../features/counter/counterSlice'
+	
+	export const store = configureStore({
+	  reducer: {
+		counter: counterReducer,
+	  },
+	})
+	
+8. Use Redux State and Actions in React Components: Now we can use the React-Redux hooks to let React components interact with the Redux store. We can read data from the store with useSelector, and dispatch actions using useDispatch. Create a src/features/counter/Counter.js file with a <Counter> component inside, then import that component into App.js and render it inside of <App>.
+
+	import { useSelector, useDispatch } from 'react-redux'
+	import { decrement, increment } from './counterSlice'
+
+	export function Counter() {
+	const count = useSelector((state) => state.counter.value)  // Access the state by useSelector
+	const dispatch = useDispatch()    // for modify the state using useDispatch
+	<button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+     >
+
+Note: action.Payload : If you pass any number in Payload so our state will update with that number.
+	<button
+          onClick={() => dispatch(incrementByAmount(10 ))}   // This payload will update our state with value 10 on every click.
+     >
+	 
+
+
+Hooks: introduced in the React 16.8 version. It allows you to use state and other React features without writing a class.
+useRef hooks: The useRef Hook allows you to persist values between renders. It can be used to access a DOM element directly.
+
+import React from 'react';
+import './style.css';
+import { useRef } from 'react';
+
+export default function App() {
+  let inputRef = useRef(null);
+
+  function handleClick() {
+    console.log('function calling');
+    //inputRef.current.value=1000;
+    inputRef.current.focus();
+    inputRef.current.style.color="red";
+    
+    }
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick} > Handle Click</button>
+    </div>
+  );
+}
+
+useMemo Hooks: The React useMemo Hook returns a memoized value. The useMemo Hook only runs when one of its dependencies update. This can improve performance.
+
+Problem: I have 2 button whenever I am clicking count and Item button in both condition multiCount() is running. To avoid to re-renders we need to use useMemo.
+import { useRef,useState } from 'react';
+
+export default function App() {
+  let [count, setCount]= useState(0)
+  let [item, setItem]= useState(0);
+ 
+
+  function multiCount() {
+
+    console.log("calling function");
+    return count*5;
+    
+    }
+  return (
+    <div>
+      <h1> count : {count} </h1>
+      <h1> Item : {item} </h1>
+      <h2> MultiCount: {multiCount()} </h2>
+
+      <button onClick={()=>setCount(count+1)}>Count</button>
+      <button onClick={()=> setItem(item+2)}> Item </button>
+
+    </div>
+  );
+}
+
+Solution: 
+
+import React from 'react';
+import './style.css';
+import { useRef,useState,useMemo } from 'react';
+
+export default function App() {
+  let [count, setCount]= useState(0)
+  let [item, setItem]= useState(0);
+
+  let multiCountMemo = useMemo(function multiCount() {
+
+    console.log("calling function");
+    return count*5;
+    
+    },[count])
+    
+  return (
+    <div>
+      <h1> count : {count} </h1>
+      <h1> Item : {item} </h1>
+      <h2> multiCountMemo: {multiCountMemo} </h2>
+
+      <button onClick={()=>setCount(count+1)}>Count</button>
+      <button onClick={()=> setItem(item+2)}> Item </button>
+
+    </div>
+  );
+}
+@Yoshita Jain
+useCallback hooks: 
+Referencial Equality: When the page reload/re-render then function will recreate.
+whenever a components re-renders, functions and variables declared inside of the component are newly created which results in those newly created values occupying memory space. to save memory because using useCallback and useMemo prevents creating the function and variable again & again.
+  The only difference is that they end up referencing the same place in memory.
+
+@codevolution tutorial
+React Router: It is a fully featured client and server side routing library for React.
+Helps create and navigate between URLs that make up your web application.
+Provide unique URLs for different components in the app and makes the UI easily sharble with other users.
+
+Course Content: Configure routes, Navigation on button click, Navigating programmatically, Dynamic routes, Nested routes, Route Parameters, Lazy loading, Authentication.
+
+To create new application :1:  npx create-react-app React-Router-Demo
+2: To add package: yarn add react-router-dom@6  OR npm install react-router-dom@6
+
+Configure routes: 
+Scenario: localhost:3000  - get Home page
+		  localhost:3000/about - get about page
+		  
+Solution: 
+1: import BrowserRouter in app component. import {BrowserRouter} from 'react-router-dom'
+2: Wrap app component with <BrowserRouter> in App.js.  Ex: <BrowserRouter> <Routes> <Routes/>  </BrowserRouter>
+3: Create 2 files home.js and about.js in src folder. 
+4: In App.js component import Routes and Route from 'react-router-dom' and we need to wrap in App.js with <Routes> tag define path and element in <Route> tag.
+Ex: In App.js and import Home & About component 
+<Routes> 
+	<Route path='/' element= {<Home/>} />
+	<Route path='about' element ={<about/>} />
+<Routes>
+
+Navigation on button click: 
+Links: 
+1: Create new file Navbar.js and import Link from 'react-router-dom'
+2: Wrap the Link Home and about component with <nav> tag.
+ex: <nav> 
+		<Link to='/'> Home </Link>
+		<Link to='/about'> about </Link>
+	<nav>
+3. Wrap the <Routes> tag in App.js component with <Navbar> tag
+Ex: <Navbar /> 
+	<Routes> ..... </Routes>
+
+Styling the Active Link: 
+1: use <NavLink> tag instead of <Link> tag 
+2: ex: const navLinkStyles= ({isActive} )=>{
+	return {
+	fontWeight: isActive ? 'bold' : 'normal',
+	textDecoration : isActive ? 'none' : 'underline'
+	}
+	}
+
+
+	<nav> 
+		<NavLink style= {navLinkStyles} to='/'> Home </NavLink>
+		<NavLink style= {navLinkStyles} to='/about'> about </NavLink>
+	<nav>
+
+Navigating programmatically: Scenario: When we click on order button it will go order-summary page.
+1: Create new file OrderSummary.js 
+ex: <> <h1> Order Confirmed </h1> </>
+2: Add <Route> tag in App.js 
+ex: <Route path='order-summary' element={<OrderSummary/>} />
+3: Create a button in Home.js and while clicking the button to navigate programmatically to use useNavigate() hooks.
+Ex: in Home.js
+	const navigate= useNavigate()
+	<>
+	<button onClick= {() => navigate('order-summary')}> Place order </button>
+	</>
+	
+Back Button: 
+1: In OrderSummary.js file add one button which is Go Back button.
+Ex: <button> Go Back </button>
+2. Use useNavigate() hooks in OrderSummary.js
+Ex: const navigate= useNavigate()
+	<>
+	<button onClick= {() => navigate(-1)}> Go Back </button>
+	</>
+	
+Note: We can pass as a 2nd optional argument in useNavigate() hooks to replace the history.
+Ex: <button onClick= {() => navigate('order-summary', {replace : true})}> Place order </button>
+
+So in this case when we will go on order-summary page and wants to Go Back then it will go on all back(directly on browser) instead of going to home page.
+
+No Match Routes: 
+1: Create new File NoMatch.js
+ex: <> <h1> Page not found </h1> </>
+2: Add new <Route> tag in App.js for No match found
+ex: <Route path="*" element={<NoMatch/>} />
+
+Nested Routes: 
+Scenario: we have Products page and Products page having search bar, featured & New link.
+1: Create a file Products.js and add search bar & featured & New link.
+Ex: <> <div> <input type='search' placeholder='Search Products'/> </div> 
+	<nav> 
+		<link to='featured'> Featured </Link>  //don't give Relative path('/')
+		<Link to='new'> New </Link>
+	</nav>
+	</>
+2: Create new files Featured.js and NewProducts.js
+ex: <> </h1> This is Featured page </h1> </>
+	<> </h1> This is New page </h1> </>
+	
+3. Add Products.js page in Navbar.js with <NavLink> tag
+<NavLink style= {navLinkStyles} to='/products'> Products </NavLink>
+
+4. In App.js wrap Products page in <Route> tag and nested routes Featured & NewProducts page.
+	<Route path='products' element={<Products/>} >
+		<Route path='featured' element={<Featured/>} />
+		<Route path='new' element={<NewProducts/>} />
+	</Route>
+	
+5: Product page doesn't know where to render the child component so react provide Outlet component. Then add Outlet component below the </nav> tag in Products.js
+ex: <nav> .... </nav>
+	<Outlet/>
+
+Index Route: Scenario: sometimes we want when we hit parent url we want to see any child data while hitting parent url. Means bydefault we can see featured component data when we hitting Product.
+Ex: We need to add <Route> tag in App.js for index
+
+	<Route path='products' element={<Products/>} >
+		<Route index element={<featured/>} />
+		<Route path='featured' element={<Featured/>} />
+		<Route path='new' element={<NewProducts/>} />
+	</Route>
+
+Dynamic Route: Scenario: If the Users page having multiple user like user1, user2, user3 ..etc and if you wants to hit(users/{id}) users/1 then it will give user1 details.
+1: We will create file Users.js having multiple user
+ex: <> <h1> User 1 </h1> 
+	   <h1> User 2 </h1>
+	   <h1> User 3 </h1> </>
+	   
+2: We will wrap Users <Route> tab in App.js
+Ex: <Route path='users' element={<Users/>} />
+
+3: Create new file UserDetails.js 
+ex:  <> <h1> Details about User Page </h1> </>
+
+4: For passing the id to get user details we can use below tag in App.js
+Ex:Static way:  <Route path='users/1' element={<UserDetails/>} />    //Similar way we can add multiple tag like id 1,2,3,4... but this is static & not feasible solution.
+Dynamic way: we will use ':userId' in path & this userId param value matched with URL what we passed.
+ex: <Route path='users/:userId' element={<UserDetails/>} />
+
+5: But in previous when I am hitting users/1 its working & gives user details but when I hits users/admin that time also it giving user details page
+a: for this I have create new file Admin.js 
+	<> <h1> This is Admin Page </h1> </>
+	
+b: Wrap this with <Route> Tag
+Ex:  <Route path='users/admin' element={<Admin/>} />
+
+Dynamic Nested Route: 
+1: I will use nested <Route> tag in App.js and remove users from path
+Ex: <Route path='users' element={<Users/>} >
+		<Route path=':userId' element={<Users/>} />
+		<Route path='admin' element={<Admin/>} />
+		
+	<Route>
+	
+2: import Outlet in Users.js and add <Outlet/> tag below the users details.
+Ex: <> <h1> User 1 </h1> 
+	   <h1> User 2 </h1>
+	   <h1> User 3 </h1>  <Outlet/>  </>
+
+URL Params: when we get data dynamic we will shows those data and use useParam() Hooks it gives key and value data.
+1: we will use useParam() hooks in UserDetails.js and will import {useParam} from 'react-router-dom'
+ex: const params=useParam()
+	const userId=param.userId
+	<> <h1> Details about User Page {userId} </h1> </>
+	
+Search Params: We are hitting url like query parameter users/?filter=active
+1: We will add 2 button in Users.js like Active Users & Reset Users
+Ex:  <> <button> Active User </button>
+		<button> Reset Users </button>
+	 </>
+2: TO deal with Search param provides userSearchParams() hooks.
+Note: It is similar to useState() hooks, then main difference is useState hold value in memory & useSearchParams() it is store in URL.
+Ex: const[searchParams, setSearchParams] = useSearchParams()
+		const showActiveUsers=searchParams.get('filter') == 'active'
+		
+	    <button onClick={() => setSearchParams({filter : 'active'})}> Active User </button>
+		<button onclick={() => setSearchParams({})}> Reset Users </button>
+		
+	// to show value in Users.js page use JSX
+	{
+		showActiveUsers ? ( <h1> Active users </h1> ) : ( <h1> Showing All Users </h1>)
+	}
+	
+Relative Links: A relative Link which does not start with forward slash(/) and will inherit the closest route in which they are renderd.
+Ex: <Link to='featured'> Featured </Link>
+    <Link to='/featured'> Featured </Link>  // In this it will not work & the URL will be localhost:9000/featured instead of localhost:9000/products/featured 
+
+Absolute Link : A relative link which does start with forward slash(/). for this we need to provide whole urls.
+Ex: <Link to='/products/featured'> Featured </Link>
+	
+Lazy Loading: If any component having more data and take much time to load then we can use Lazy loading.
+Ex: If about.js having much data in <> Data....  </>
+To check time goto Network tab and check mainchunk.js and right click on Refresh button & click on Empty Chache and hard reload.
+a. Remove the normal import from App.js, 1st import React then dynamic import the About.js
+Ex: import React from 'react'
+	const LazyAbout = React.lazy(()=> import('./components/About'))
+b. Change the Component <LazyAbout/> instead of <About/>
+Ex: <Route path='about' element ={<LazyAbout/>} />
+Note: When you reload and check the log in console you will get the error Suspense fallback. for this we need to add <React.suspense> tag.
+Ex: <Route path='about' element ={<React.suspense fallback='Loading...'> <LazyAbout/>} />
+
+React Route Authentication and Protected Routes: 
+
+
+------------------------Interview Question
+Difference between var,let and const
+what value return without comparing in find() and findIndex()
+Fetch API: There are other alternatives. Write the code of get,post & delete in componentDidMount lifecycle or useEffect().
+	XMLHttpRequest.
+	Axios.
+	Got.
+	SuperAgent.
+	Requestify.
+
+How to pass data from child to parent:- using callback function we can acheive it.
+In the parent component, create a callback function. This callback function will retrieve the data from the child component.
+Pass the callback function to the child as a prop from the parent component.
+The child component calls the parent callback function using props and passes the data to the parent component.
+
+
+
+
+--default parameter, 
+https://www.learnbestcoding.com/post/105/implementing-componentwillunmount-in-react-hooks
+How to write componentDidMount() in useEffect(): I use a regular useEffect() hook with an Empty array.
+
+How to write componentDidupdate() in useEffect(): I use a regular useEffect() hook with an dependency array. 
+How to write componentWillUnmount() in useEffect(): I use a regular useEffect() hook with an empty dependency array. Then I use a return statement and pass a function to the return statement as the argument.
+
+In Pom.xml
+1: frontend-maven-plugin
+<plugin>
+	<groupId>com.github.eirslett</groupId>
+	<artifactId>frontend-maven-plugin</artifactId>
+</plugin>
+
+2: maven-resources-plugin 

@@ -1,0 +1,314 @@
+1) JVM System Parameter
+   -Dspring.profiles.active=dev
+   
+   discory
+   server config
+   
+2) spring.profiles.active= prod  in application.properties
+
+What is Springboot ? Why did you use springboot in your project? why not Spring?
+
+What RAD that you are taking about ?How can you achive RAD using Springboot?
+
+
+Is this possible to change the port of Embedded Tomcat Server in Springboot?
+- server.port = 8081 in application.properties
+
+what are the starter dependencies -spring-boot-starter, spring-boot-starter-web,starter-actuator, starter-data-jpa, h2, spring-boot-starter-test, starter-thymeleaf,-starter-logging
+
+Exculde Tomcat and add Jetty Server - Yes embadded Tomcat is available in starter web dependency so we can write <exclusions> in starter web dependency and add the starter Jetty dependency in starter web dependency.
+Using exclusion tag in Web starter dependency <exclusions> <exclusion> Tomcat dependency </exclusion></exclusions>
+
+Can we disable the default web server in the Springboot application: 
+Yes, we can use the application.properties to configure the web application type- spring.main.web.application.type=none
+
+How to disable a specific Auto-configuration class? 
+You can use the exclude attribute @EnableAutoconfiguration , if you find any specific Auto-configuration classes that you do not want to being applied
+By using "exclude" ex:
+@EnableAutoconfiguration(exclude={DataSourceAutoConfiguration.class})
+
+What does the @SpringbootApplication annotation do internally?
+@SpringbootApplication is equal to @Configuration + @EnableAutoconfiguration + @ComponentScan
+
+How to use a property defined in Application.properties file into your Java Class?
+Use @Value annotation to access the properties which is defined in the application-properties file.
+@Value("${custom.value}")  Ex: custom.value = serever.port
+private String customVal
+
+Ex:
+@RestController
+public class CodeDecodeController
+{
+	@Value("{server.port}")
+	private String serverPort;
+	
+	@GetMapping("/codeDecode")
+	public void codeDecodeMethod()
+	{
+	Sout("My port is" + serverPort);
+	}
+}
+
+Explain @RestController annotation in Springboot?
+@RestController is a convienece for creating Rest controllers. It is a specialization of @Component and is Autodetect through Classpath scanning.its add the @Controller and @ResponseBody annotations. Its conevert the response to JSON/XML.
+Which eliminates the need to annotate every request handling method of the controller class with the @ResponseBody annotation. it is typically used in
+combination with annotated handler methods based on the @RequestMapping annotation.
+Indicates that the date returned by each method will be written straight into the response body instead of rendering a template.
+
+Differnece b/w @RestController and @Controller?
+To Answer this we 1st understand the differnce b/w Web Application and Rest API.
+	Its that the response from a web application is generally view(HTML+CSS+JS) because they are intended for human viewers while Rest API just returns data in the form of JSON or XML because most of the REST clients are programs.
+Same goes with @RestController and @Controller.
+@Controller map of the model object to view or template and makes it human readable but @RestController simply returns the object and object data is directly written into HTTP response as JSON/XML.
+@Controller - return HTTP response.
+@RestController - return JSON/XML response
+
+What are the major differnece b/w GetMapping and RequestMapping?
+@RequestMapping can be used with GET,POST,PUT, and many other request methods using the method attribute on the annotation. Whereas GetMapping is only an extension of RequestMapping, which helps you to improve clarity on request.
+
+What is the use of profiles in Springboot
+1) JVM System Parameter
+   -Dspring.profiles.active=dev
+   
+2) spring.profiles.active= prod  in application.properties
+
+What is Spring Actuator? What are its advantages?
+Monitor and manage your Springboot application.
+
+How to use Actuator in your Springboot Application?
+Add Actuator dependency in Pom.xml
+Hit:  https://localhost:8081/actuator/
+	  https://localhost:8081/actuator/health
+	  
+You will be able to see { status: "UP" } without doing anything just bcz of dependency.
+some properties -
+#enable all endpoints like bean, health, info, logger...
+management.endpoints.web.exposure.include=*
+
+#expose more about health
+management.endpoint.health.show-details=always
+
+#Change the endpoint of Actuator with admin
+management.endpoints.web.base-path=/admin
+
+Actuator Endpoint? 
+management.endpoints.web.base-path=/admin
+
+Enabling HTTP Trace?
+
+HTTP Endpoint Trace?
+
+Actuator Endpoint?
+
+Customize the management server port?
+Add this to in Application properties file
+	Management.server.port=8090;
+	
+How to create custom Endpoints?
+This can be achived by adding the following annotations:
+
+Steps to deploy Springboot web applicatons as JAR and WAR Files?
+To deploy a Spring boot web application, you just have to add the following plugin in the pom.xml file
+	<plugin> Spring-boot-maven-plugin</plugin>
+	
+By using the above plugin , you will get a JAR executing the package phase. This JAR will contain all the necessary liberaries and dependencies require. it will also contain an embedded server. So, you can basically run the application like an ordinary JAR file.
+Note: The Packaging element in the pom.xml file must be set to jar to build a JAR file as below: 
+	<packaging> jar </packaging> OR <packaging> war </packaging>
+	
+Advantages of YAML file over the Properties file?
+More clarity and better readability
+Perfect for hierarchaical configuration data, which is also represented in a v= in a better, more readable format
+Support for Maps, List, and scalar types.
+Ex: if you need ex how to read value from YAML file check CodeDecode tutorial.
+
+Different ways to load YAML file in SpringBoot?
+Use YamlMapFactoryBean to load YAML as a Maps.
+Use YamlPropertiesFactoryBean to load YAML as Properties
+
+Which is given preference YAML or Properties file in SpringBoot?
+Application.properties are given preference over application.yml file in Springboot Application.
+
+Hibernate and JPA difference?
+JPA stands for Java Persisence API. The JPA specification was developed by Java as a standard way to map object to relational tables. JPA just provides the specification, it does not proivde the implementions.
+So you cannot use JPA by itself, you will need to use a JPA provider the that implements the JPA framework. EclipseLink,TopLink and Hibernate, iBatis are some frameworks that implements the JPA Specification.
+The Adavantage of using a framework that implements the JPA specification is that you can easily switch the framework.
+
+What should I use?
+We can't use JPA by itself, we need to use it with some JPA provider. Hibernate is a JPA provider. When we use Hibernate in our code, we can use the proprietary methods of Hibernate or we can use the JPA methods implemented by Hibernate.If we use JPA method in our code, we will be easily able to switch to some other JPA provider like EclipseLink or TopLink.
+ 
+which embedded DB provides Springboot.
+HSQLDB(HyperSQL DB),Apache Derby, H2 DB - By default, the console view of the H2 database is disabled. To enabled this add below property
+Add dependency h2 and add the property "spring.h2.console.enabled=true" in properties file.
+
+What is Springboot-Auto-configuration.
+Spring Boot auto-configuration automatically configures the Spring application based on the jar dependencies that we have added.
+We can enable the auto-configuration feature by using the annotation- EnableAutoConfiguration. But this annotation does not use because it is wrapped inside the @SpringBootApplication
+
+
+---------------------------------- Spring Annotations
+Spring Annotations: are a form of Metadata. Annotations are used to provide supplemental information about a program.
+
+1. @SpringBootApplication: It is a cobination of 3 annotations. to mark a configuration class that declares one or more @Bean methods and also triggers auto-configuration and component scanning.
+	@EnableAutoconfiguration + @ComponentScan + @Configuartion
+	@EnableAutoconfiguration: Enables the creation of beans in container.
+	@ComponentScan: Scan every class in sub packages find out and create the bean in container.
+	@Configuartion: responsible to create bean and give to container.
+
+2. 	@Target: @Target tag is used to specify at which type, the annotation is used.
+	The java.lang.annotation.ElementType enum declares many constants to specify the type of element where annotation is to be applied such as TYPE, METHOD, FILED etc. ElementType: Where the annotation can be applied, TYPE: class, interface, enum. FIELD: fields, METHOD:method, CONSTRUCTOR: constructor, LOCAL_VARIABLE: local variable, ANNOTATION_TYPE: annotation type, PARAMETER: parameter.
+	
+3. @Retention: @Retention annotation is used to specify to what level annotation will be available.
+	RetentionPolicy.SOURCE: refer to the source code, discarded during compilation. It will be not available in the compiled class. 
+	RetentionPolicy.CLASS: refer to the .class file, available to the java compiler but not to JVM. it is included in the class file.
+	RetentionPolicy.Runtime: refers to the runtime, available to the java compiler and JVM.
+	
+4. @Inherited and @Documented: By default, annotations are not inherited to subclass. The @Inherited annotation marks the annotation to be inherited to subclass.
+	The @Documented marks the annotationfor inclusion in the documentation.
+	
+5. @Configuartion: Tag the class as a source of bean definitions for the application context.
+	Point to Note: The main application class is also a bean, as its annotated with @Configuration, Which is a @Component
+	
+6. @EnableAutoconfiguration: The @EnableAutoconfiguration annotation enables SpringBoot to Auto-configuration the application context.Therefore, it automatically creates and register bean based on both the includes JAR files in the classpath and the beans defined by us, implicitly @EnableAutoconfiguration annotation which makes SpringBoot create many beans automatically, relying on the dependencies in pom.xml file.
+	The package of the class that is annotated with @EnableAutoconfiguration has specific significance and is often used as a "default". For Ex: It will be used when scanning for @Entity classes. It generally recommended that you place @EnableAutoconfiguration in a root package so that all sub-packages and classes can be searched. It's always used with @Configuartion annotation.
+@EnableAutoconfiguration Parameter: 
+exclude: Exclude the list of classes from the Auto configuration.
+	Ex: @EnableAutoconfiguration(exclude={JdbcTemplateAutoConfiguration.class})
+
+excludeNames: Exclude the list of fully qualified class names from the auto configuration. This parameter added since Spring boot 1.3.0
+	Ex: @EnableAutoconfiguration(excludeNames={"org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration.class})
+
+7. @ComponentScan: When working with Spring, we can annotate our classes in order to make them into Spring beans. Furthermore, we can tell spring where to search for the these annotated classes, as not all of them must become beans in this particular run.
+	With Spring, the @ComponentScan annotation is used with the @Configuartion annotation to tell spring the packages to scan for annotated component. @ComponentScan without arguments tells spring to scan the current package and all of its sub-packages.
+The main Application class is also a bean, as it's annotated with @Configuartion, which is a @Component.
+
+8. @Autowired: Its the way to implement Dependency Injection in Spring/SpringBoot application.
+	Container will provide the required bean to dependent bean at runtime.
+	Spring provides annotation-based Auto-wiring by providing @Autowired annotation.
+	It is used to Autowire spring bean or setter methods, instance avriable and constructor.
+	When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type.
+	
+9. @Component: How will container autowire the required bean in dependent bean at runtime? It first need to create beans during startup so that it can provide beans at later stage.
+	How will container know who POJO/Java class should be considered as bean and whom to ignore? - Which is annotated by @Component will be considered.
+	@Component: It is a class-level annotation.
+	It is used to mark a Java class as a bean.
+	A java class annotated with @Component is found during the classPath
+	The Spring framework pick it up and configure it in the application context as a spring bean.
+	It is a generic stereotype for any spring managed component. The specialization are @Controller, @Service,@Repository.
+	
+10. @Controller: The @Controller is a class level annotation.
+	It is a specialization of @Component.
+	It marks a class as a Web Request Handler. It is often used to server web pages. It is used in conjuction with @RequestMapping annotation.
+	We also use @RestController when we need to send response in JSON format directly.
+	By Default, @Controller returns a string that indicates which route to redirect. its used mostly with JSPs. It return URL to new JSP page where it has to be redirected.
+	They are nothing but the specialization form of @Component annotation for certain situation.Instaed of using @Component on a controller class in Spring MVC, We use @Controller, which is more readable and appropriate.
+
+11. What will happen if we replace @Controller with @Component.
+
+12. @Service: It is also used at class level.
+	It is a specialization of @Component.
+	It tells the spring that class contains the business logic.
+	But at the end the main task of this annotation is also to mark the class capable to become a bean in spring container similar to component. We can use @Component also and it will work the same as this annotation does. They are technically the same.
+
+13. @Repository: 
+It is also used at class level.
+	It is a specialization of @Component.
+	The repository is a DAOs(Data Access Object) that access the database directly. The repository does all the operations related to the database.
+	Here also we can use @Component but it's always a good idea to choose the annotation based on their layer conventions bcz In most typical application, we have distinct layers like data access,presentation,service,business etc.
+	Here also by using specialized annotationwe hit two birds with one stone. First, they are treated as spring bean and second you can put special behaviour required by that layer.
+	@Repository not only helping in annotation based configure but also catch Platform-specific exceptions and re-throw them as one of Spring's unified unchecked exception.
+
+14. @Required: It applies to the bean setter method. It indicates that the annotated bean must be populated at configuration time with the required property, else it throws an exception BeanInitilizationException.
+
+15. @RequestMapping:  It is used to map the web requests. It has many optional elements like consumes, header, method, name, params, path, produces, and value. We use it with the class as well as the method.
+	@Produces : Used for get() ,  @Produces({"application/xml", "application/json"})
+	@Consumes : Used for Post() , @Consumes("text/plain")
+
+16. @GetMapping: It maps the HTTP GET requests on the specific handler method. It is used to create a web service endpoint that fetches It is used instead of using: @RequestMapping(method = RequestMethod.GET)
+
+
+17. @PostMapping: Creates and use parameter as consumes={"application/json"} which is accept JSON format data
+
+18. @PutMapping: Creates and Update
+
+19. @DeleteMapping: DeleteMapping
+
+20. @PatchMapping: PATCH does partial update 
+
+21. @RequestBody: It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to convert the body of the request. When we annotate a method parameter with @RequestBody, the Spring framework binds the incoming HTTP request body to that parameter.
+it mostly use with Post method. Ex:   @POST public Course getCourse(@RequestBody Course course)
+
+22. @ResponseBody:  It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object into JSON and XML format.
+
+23. @PathVariable: It is used to extract the values from the URI/URL. It is most suitable for the RESTful web service, where the URL contains a path variable. We can define multiple @PathVariable in a method.
+ex: http://localhost:8080/api/employees/111
+
+24. @RequestParam: It is used to extract the query parameters from the URL. It is also known as a query parameter. It is most suitable for web applications. It can specify default values if the query parameter is not present in the URL.
+ex: http://localhost:8080/spring-mvc-basics/api/foos?id=abc
+
+25. @RequestHeader:  It is used to get the details about the HTTP request headers. We use this annotation as a method parameter. The optional elements of the annotation are name, required, value, defaultValue. For each detail in the header, we should specify separate annotations. We can use it multiple time in a method.
+
+26. @RestController: It can be considered as a combination of @Controller and @ResponseBody annotations. The @RestController annotation is itself annotated with the @ResponseBody annotation. It eliminates the need for annotating each method with @ResponseBody.
+
+27. @RequestAttribute: It binds a method parameter to request attribute. It provides convenient access to the request attributes from a controller method. With the help of @RequestAttribute annotation, we can access objects that are populated on the server-side.
+
+28. @Qualifier: Which is used to eliminate the issue of which bean needs to be injected.
+
+Note: JAX-RS annotations : @Path, @PathParam, @FormParam, @Produces, @Get, @Post
+
+Service registry: it is a type of server/service where all the service are registered.
+
+PatchMapping --> PutMapping + PostMapping
+
+@QueryParam vs @RequestParam : 
+@QueryParam is a JAX-RS framework annotation and @RequestParam is from Spring.
+Apart from these mentioned differences in framework, one major difference is @RequestParam will always expect a value to bind. Hence, if value is not passed, it will give error. This is not the case in @QueryParam
+
+Whare we can see the log status : http://localhost:8080/log
+https://www.geeksforgeeks.org/spring-boot-logging/
+
+
+
+----------------------Spring Security
+
+JWT(JSON Web Token) used to authenticate users.
+JWT gains popularity because of token not cokkies and no session.
+When request first times comes to server, then server validates the token and if the validation request fails the request is rejected.
+
+Steps:
+Check the JWT is well formed or not.
+check signature
+Validate the standerd claims
+check the client permission
+
+Authentication: To validate them.
+Authorization: what permission to have or giving to them.
+
+
+
+------------------------
+
+Solid Principal: The SOLID principles are a set of five design principles intended to make software designs more understandable, flexible, and maintainable. These principles are particularly relevant to object-oriented programming (OOP) and can be applied in Java.
+1: Single Responsibility Principle (SRP)
+2: Open/Closed Principle (OCP)
+3: Liskov Substitution Principle (LSP)
+4: Interface Segregation Principle (ISP)
+5: Dependency Inversion Principle (DIP)
+
+Exception Handling in Springboot: 
+1: Controller-Level Exception Handling: Using the @ExceptionHandler annotation within a controller allows you to handle exceptions specific to that controller.
+2: Global Exception Handling with @ControllerAdvice: The @ControllerAdvice annotation allows you to create a centralized exception handler that applies to all controllers in your application.
+3: Custom Exceptions: Define custom exception classes to represent specific error conditions in your application.
+4: Using ResponseStatusException: Spring 5 introduced ResponseStatusException, which allows you to throw exceptions with specific HTTP status codes directly from any point in your application.
+5: Handling Multiple Exceptions: You can define multiple @ExceptionHandler methods within a single @ControllerAdvice or controller class to handle different types of exceptions.
+
+
+Java Contact - Jeeva, Vinod, Santosh kumar, Sonali Umare, Mohammad Shahid, Shadab hussain, 
+
+
+
+
+
+
+
+
+
