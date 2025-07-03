@@ -1,0 +1,288 @@
+What is Jenkins: 
+	Jenkins is an Contineous integration tools user to build(Compile, test) code and deploy it to the production.
+	Jenkins provide 100s of plugins to support building, deploying and Automating any project.
+	It is a server based system that runs in servlet container such as Apache Tomcat. It supports version control tools like SVN, git to Automate build.
+
+What is Contineous integration: is a process in which all development work is integrated as early as possible. The resulting artifect are automatically created and tested. This process allows to identify errors as early as possible.
+
+Before Contineous Integration: 
+	The entire Source code was built and then tested.
+	Developers have to wait for test results
+	No feedback
+	
+After Contineous Integration: 
+	Every commit made in the source code is built and tested.
+	Developers know the test result of evrey commit made in the source code on the run.
+	Feedback is present
+	
+Download: Download the Jenkins
+1. Run the war file: java -jar jenkins.war
+2. Password you will get in CMD & this folder location: C:\Program Files (x86)\Jenkins\secrets\initialAdminPassword
+3. Port is 8080
+4. open in browser http://localhost:8080/ and put you password
+5. Go to installed suggested plugins
+6. then create profile username and password
+7. then you will get url http://localhost:8080/ if you want change the port you can change and save & finish. You will get Jenkins Dashboard.
+
+Note: If you want to change port then give like this: java -jar jenkins.war http port portNumber
+
+Working with Example:
+1. Create a simple Springboot project and create a simple test class.
+2. Create a new repository and upload your code on Github and commit.
+3. Create a new Job and enter the name (Ex: Spring-jenkins) and create Freestyle project or Maven project & click ok.
+4. Give description and we are adding Github project the click on Github and Github project Url & Display name(Ex: Spring Jenkins) then in Source code management select git give repository Url and add your Jenkins credentials and select credentials.
+5. After that in Build triggers schedule your task and select Poll SCM you can enter 5star/cron job in schedule(Ex: *****) 
+6. In Build select Invoke top level Maven targets and give goal as install
+7. In Post Build Actions select email Notification you can add your email and click on Apply.
+8. Goto Jenkins -> click on your Job Spring-jenkins -> click on Build Now -> your build started and open cosole check you log.
+
+Similary if you change anything in springboot code so just commit that changes after commiting automatically new bulid started in Jenkins
+
+Blue mark-> build success  Red mark-> build fail
+
+Configure your Email Notification: 
+1. Manage Jenkins -> Configure system -> At the last Email Notification then add below datails SMTP server, apply and save.
+	SMTP server - smtp.gmail.com , email suffix -> @gmail.com , username - As email, password, SMTP port - 465, replyToAddress - add email, 
+	
+What is Pipeline: 
+Pipeline is workflow with the group of events or Jobs that are chained and integrated with each other in sequence.
+	Pipeline is process of contineous delivery automation using Jenkins job(item).
+	Each Job contains some processing inlet and outlets
+	Builds - deploy - test - Release
+	Contineous Delivery Pipeline
+	
+Types of Pipeline: 
+	Build plugin Pipeline 
+	Declrative Pipeline
+	Scripted Pipeline
+	
+Why we need Build plugin Pipeline :  
+
+
+Working Example of Contineous Delivery: Creating Job for Dev, UAT, Production
+1. Create a new Job and enter the name (Ex: Dev) and create Freestyle project or Maven project & click ok.
+2. Give description and we are adding Github project the click on Github and Github project Url then in Source code management select git give repository Url and add your Jenkins credentials and select credentials. 
+3. After that in Build triggers schedule your task and select Poll SCM you can enter 5star/cron job in schedule(Ex: *****) 
+4. In Build select Invoke top level Maven targets and give goal as install
+
+Similary create for UAT 
+Similary create for Production
+
+After creating Job now we will create a Pipeline:
+Goto Manage Jenkins -> Click on Manage Plugin -> Go To Available -> Serch Build Pipeline ->Install
+Click on + button ->  click on Build Pipeline view and Give your view name (Ex: JavaTechie-Project) -> Description (JavaTechie Pipeline) -> Select Initial Job(means which job you want to run 1st) -> Dev ->  In Display option ->  no of display builds(5), Row Headers(Just the Pipeline number) -> click on apply and Ok -> So our build pipeline is created for Dev
+
+I want to trigger UAT after Dev so goto UAT-> right click & Configure ->Go to Build Trigger center -> click on Build after other Project are builts -> Project to watch -> Select Dev ->Apply and save
+
+Similary I want to trigger Prod after UAT so goto Prod-> right click & Configure ->Go to Build Trigger center -> click on Build after other Project are builts -> Project to watch -> Select UAT ->Apply and save.
+
+Just commit your code -> Automatically Dev will start and complete -> then UAT -> then Prod
+So if one job got failed it will stop the execution and another job will not trigger.
+
+Building Docker Image Using Jenking: 
+1. Craete a maven Project(ex: dockerjenkinsintegrationsample).
+2. Specify Final Jar name in pom.xml -> in <finalname> tag
+	<build> <finalname> docker-jenkins-integration-sample </build> </finalname>
+3. Now need to sync our code with github -> Goto Github create repository and commit your code
+4. Now create a new job similar to previous
+5. afetr commit the code new build will start and complete and Jar will create as a name in target folder
+6. For Integrate Jenkins with Docker we need to add plugins -> goto manage Jenkins -> Manage plugin -> goto available -> search docker (CloudBees Docker build and publish .., Docker pipeline,Docker plugin, Docker build step )
+Note: If you want to confirm its installed or not then goto  click on your project -> goto configure-> goto below & Build environment -> In build and check in add build step dropdown you will see build and publish docker image,Docker build and publish.
+7. Create a new file in code as dockerFile and give below properties:
+	FROM openjdk:8
+	EXPOSE 8080
+	ADD target/docker-jenkins-integration-sample.jar docker-jenkins-integration-sample
+	ENTRYPOINT ["java","-jar","/docker-jenkins-integration-sample.jar"] --> Dockerimange name
+
+8. commit the file on github
+9. Now we need to give instruction to Jenkins to raed our dockerFile create Docker image
+click on your project -> goto configure-> goto below & Build environment -> In build -> Docker build and publish -> Give Repository name as javatechie/docker-jenkins-integration-sample and add dockerhub credentials apply and save -> now start a build -> once build is success it will create dockerimage
+tagname/dockerimage name
+login on dockerhub.com -> tag name is javatechie
+
+10. After completed successfully now you can see the docker image in dockerhub site and docker terminal using command -> docker images 
+ 
+ 
+ 
+ 
+---------------------- Kafka
+Kakfa Monitor tools: Kafka Monitor, Zookeper, Kafka Web view
+Kafka:
+Kafka cluster: Group of Kafka Broker(KB1,KB2,KB3...). 
+Kafka Broker: is server where our Kafka is running.
+Kafka Producer: Write a new data in Kafka cluster.
+Kafka Consumer: cosume/use the data from Kafka cluster.
+Zookeper: Manage the Kafka cluster. Track the health of Kafka cluster.
+Kafka connect: If you want to use any external data(like DB...) into Kafka cluster using Kafka connect.
+Kafka Stream: is functinality to use for data transformation. Take the data from Kafka cluster and trasform data.
+
+Download and Install:
+Download from Apache site and install.
+/config: server.properties -> Written BrokerId and Zookeper port
+/bin: .sh file is there -> like 
+
+Start Kafka: 
+1st go to your Kafka folder\bin\windows and run the command: zookeper-server-start.bat ..\..\config\zookeper.properties
+
+Open another CMD and run Kafka Broker: kafka-server-start.bat ..\..\config\server.properties
+
+Open 2 more CMD: one for Producer and another for Consumer
+
+Producer CMD: kafka-console-producer.bat --broker-list localhost:90092 --topic my-topic
+Consumer CMD: kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+
+Note: if you are write anything in Producer so it will put in my-topic and Consumer retrive the date from my-topic
+For Stop: crtl + C
+from-beginning: means from starting whatever data you have keep in my-topic it will retrive.
+
+Kafka topic: Named container for similar events. Unique identifier of a topic in its name.
+Ex: Student topic will have student data, Food topic will have food related data.
+Producer produce a message into the topic(ultimately to partitions in round robin fashion) or directly to the partitions. Consumer poll continuously for new messages using the topic name.
+
+Partitions: A topic is partitioned and distributed to Kafka in round robin fashion to achieve distributed system.
+A topic is split into several parts which are known as the partitions of the topic.
+Partitions is where actually the message is located inside topic.
+Therefore, while creating topic we need to specify the number of partitions(the no. of arbitrary and can be change later).
+Each partition is an ordered, immutable sequence of records.
+Each message gets stored into partitions with an incremental id known as its Offset value.
+Maintain ordering is there only at partition level.
+
+Partition factor: A partition is replicated by this factor and it is replicated in another broker to prevent fault tolerance.
+
+Data sending: 
+
+Message --> Kafka Broker --> Topic --> P0,P1,P2,P3... (Partition)
+
+Sending data using With and Without key: 
+Without key: means data saves in random order.
+With key: 1st check key is available or not if yes, then it will apply hashing technique and calculate hash code.
+
+2 things: Key and Value , Key is optional.
+We can send message with key or without key.
+When sending message with key, ordering will be maintained as they will be in the same partition.
+Without key we can not guarantee the ordering of message as consumer poll the message from all the partitions at the same time.
+
+Producer & consumer property with key: 
+kafka-console-producer.bat --broker-list localhost:90092 --topic fruits --property "key.separator=-" --property "parse.key=true"
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic fruits --from-beginning -property "key.separator=-" --property "parse.key=true"
+
+message: hello-apple
+		 hello-mango
+		 bye-kiwi
+		 bye-grapes
+		 
+Consumer Offset: Position of a consumer in a specific partition of a topic
+When a consumer group reads message from a topic, each member of the group maintains its own offset and updates it as it consumes message.
+
+_consumer_offset: _consumer_offset is a built-in topic in Apache Kafka that keeps track of the latest offset committed for each partition of each consumer group.
+	The topic is internal to the Kafka cluster and not meant to be read or written to directly by clients. Instead, the offset information is stored in the topic and updated by the Kafka broker to reflect the position of each consumer in each partition.
+The information in _consumer_offset is used by Kafka to maintain the reliability of the consumer groups and to ensure that message are not lost or duplicate.
+	There is a seperate _consumer_offset topic created for each consumer group. So if you have 2 consumer groups containing 4 consumers each, you will have a total of 2 _consumer_offset topic created.
+The _consumer_offset topic is used to store the current offset of each consumer in each partition for a given consumer group. Each consumer in the group updates its own offset for the partition  it is assigned in the _consumer_offset topic, and the group coordinator uses the information to manage the assignment of partitions to console-consumers and to ensure that each partition is being consumed by exactly one consumer in the group.
+	When a consumers joins a consumer group, it sends a join request to the group coordinator.
+	The group coordinator determines which partitions the consumer should assigned based on the number of consumers in the group and the current assignment of partitions to consumers.
+The group coordinator then sends a new assignment of partitions to the consumer, which includes the set of partitions that the consumer is responsible for consuming. 
+The consumer starts consuming data from the assigned partitions.
+It is important to note that consumer in a consumer group are always assigned partition in a "Sticky" fashion, meaning that a consumer will continue to be assigned the same partitions as long as it remains in the group. This allows consumers to maintain their position in the topic and continue processing where they left off, even after a rebalance.
+Ex: 
+1. 1st go to your Kafka folder\bin\windows and run the command: zookeper-server-start.bat ..\..\config\zookeper.properties
+
+2. Open another CMD and run Kafka Broker: kafka-server-start.bat ..\..\config\server.properties 
+
+3.a. open another CMD & run : kafka-topics.bat --bootstrap-server=localhost:9092 --list
+b. to check consumer group: kafka-consumer-group.bat --bootstrap-server localhost:9092 --list
+c. kafka-consumer-group.bat --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+d. crtl + c
+e. kafka-consumer-group.bat --bootstrap-server localhost:9092 --list  //will create bydefault consumer-group
+f.  kafka-consumer-group.bat --bootstrap-server localhost:9092 --topic my-topic --from-beginning  then crtl + c
+g. kafka-consumer-group.bat --bootstrap-server localhost:9092 --list //we are seeing to consumer-group
+
+4. open another CMD and run Producer without key
+	kafka-console-producer.bat --broker-list localhost:90092 --topic my-topic
+
+5. Assigned Group id to kafka consumer and create 3 consumer id based on partition
+	kafka-console-consumer-group.bat --bootstrap-server localhost:9092 --topic my-topic --group console-sonsumer-2682
+similary open 2 more CMD and assigned group id
+	kafka-console-consumer-group.bat --bootstrap-server localhost:9092 --topic my-topic --group console-sonsumer-2682 
+
+then to chack the description of topic 
+	.\kafka-topics.bat --describe --topic my-topic --bootstrap-server localhost:9092
+
+so now we need to give message(1,5,sw,rm) from producer so all message is going to only one consumer id. so if close 1st consumer id then it will go all topic into another consumer id.
+
+Now create a producer with key:
+	kafka-console-producer.bat --broker-list localhost:90092 --topic foods --property "key.separator=-" --property "parse.key=true"
+check the partitions -- having 4 partition
+	.\kafka-topics.bat --describe --topic foods --bootstrap-server localhost:9092
+Create 2 consumer id
+	kafka-console-consumer-group.bat --bootstrap-server localhost:9092 --topic foods --group console-sonsumer-2682 
+pass the message from producer: 
+hello-apple
+bye-banana
+welcome-kiwi
+goodbye-orange
+So in this case 2 partition are assigned to 1 consumer id and other 2 are assigned to another.
+
+Segments: Set of messages calles Segments. Use of segments in commit log.
+	Producer --> message --> Topic(P1,P2,P3,P4...) --> P1[M1,M2,M3,M4....]   M1->Message1
+Commit Log: store our messages under commit log.
+	goto under config folder and open "server.properties"
+	will see the directory  /temp/kafka-logs  --> then you see the file ----.log here all the message are stores
+a. log.dirs= /temp/kafka-logs
+b. open another CMD and type cd /temp/kafka-logs
+	then type dir
+	goto any partition like  cd food-0
+	type dir now you will see like 000000.log file
+	So all the data will be available in this log file in the encrypted form from producer and when Consumer read so 1st it will decrypt.
+
+c. log.rentention.hours=168  //default time
+d. log.segment.bytes= 1073741824 //default size
+	
+Retention Policy: till which that data should be available. 2 - types of Retention Policy
+1. Size based Policy: Ex: 1GB, so after 1 GB it will delete the file	
+2. Time based Policy: Ex: 7 days, so after 7 days it will delete the file
+
+Kafka Cluster: Group of Kafka brokers/server:
+To start: goto bin and run the below command
+	kafka-server-start.bat ..\.. \config\server.properties
+
+a. broker.id=0  // it will be unique
+b. port number 
+	listeners=PLAINTEXT://:9092
+
+1. We need to go to config folder and copy and paste server.properties and rename server-1 & server-2.properties file
+2. Open server-1 and server-2 properties file and change the broker id
+	broker.id=1  & broker.id=2
+	listeners=PLAINTEXT://:9093 & listeners=PLAINTEXT://:9094
+	log.dirs= /temp/kafka-logs-1 & log.dirs= /temp/kafka-logs-2
+So now run the kafka server and you will see 3 log folder and zookeper is same for all. zookeper.connect=localhost:2181
+kafka-server-start.bat ..\..\config\server.properties 
+kafka-server-start.bat ..\..\config\server-1.properties 
+kafka-server-start.bat ..\..\config\server-2.properties 
+
+Note: message is going into partition. Leader are decides on Partition level
+B1{P1,P2,P3(Leader)} , B2{P1(Leader),P2,P3}, B3{P1,P2(Leader),P3}
+here : B1->Broker1, P1->Partition1
+	The main purpose of creating cluster(B1,B2,B3) is for "Fault Tolerence" means if anyone broker is down then it will read from another broker.
+So if message is going into 3rd partition means 1st message will go in B1 then it will replicate to B2 and B3 because Partition3 is a Leader of B1.
+
+3. create another CMD and run the command
+	kafka-topics.bat --create --zookeper localhost:2181 --replication-factor 3 --partition 3 --topic my-gadgets  --for old version
+	kafka-topics.bat --create --topic gadgets --bootstrap-server localhost:9002,localhost:9003,localhost:9004 --replication-factor 3 --partition 3  --for new version
+	then create a producer
+	kafka-console-producer.bat --bootstrap-server localhost:9002,localhost:9003,localhost:9004 --topic gadgets
+	
+4. create another CMD for Consumer and run the command
+	kafka-console-consumer.bat --bootstrap-server localhost:9002,localhost:9003,localhost:9004 --topic gadgets --from-beginning
+
+5. Now you give message from Producer
+6. Create another CMD & run the below command and see the Leader & Replica(ISR-In Sync Replica)
+	kafka-topics.bat --describe --topic gadgets --bootstrap-server localhost:9002,localhost:9003,localhost:9004
+
+Note: Now If I stopped 1 broker and run again then Leader & Replica will change.
+
+
+
+
+	
+

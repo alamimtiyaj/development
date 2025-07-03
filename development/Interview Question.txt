@@ -1,0 +1,262 @@
+Interview Ques- 
+Why String is immutable
+Java 8 feature
+Difference b/w Functional interface and Normal interface
+Reverse a string without function
+What is lambda expression
+Where you use the Stream API
+Difference b/w Map and Flatmap
+Filter the Odd number from the list using Java 8 feature
+Filter the Spring Value from the list using Java 8 feature
+How to perform Map()
+Working of Hashmap
+How to tell spring to create single object
+What is the feature of Springboot
+What are the annotation used in springboot
+what is @SpringBootApplication Annotation
+Difference between @Controller and @RestController - 
+Difference between @RequestMapping and @GetMapping
+What is @QueryParam/@RequestParam 
+how we create end to end Springboot application
+What is Actuator
+What is microservice
+how it will call 2 or more microservices using springboot
+What is service.registry
+Difference between Hibernate and JPA
+Delete, Drop and truncate difference
+Join, Cursor, procedure and function
+Spring Security - Difference between Authentication and Authrization
+How to skip/stop finally block - Using System.exit()
+
+what do mean by DSA- Array, Collection(Arraylist,HashMap,Set)
+Complexity of HashMap,
+int arr[]={2,1,4,3,6,8,7,10} int target=13 - to find pair which are equal to 13
+
+
+
+-------------
+Join()
+Put and Patch()
+lazy and eager loading
+what is API gateway
+How to create microservice using API gateway
+How to validate the request from microservices(JWT)
+Fail fast and fail safe
+Insertion, searching and deletion which is used for List or Linkedlist. - Insertion & Deletion is slow in ArrayList bcz internally uses Array. 
+Insertion & deletion - Linkedlist, Searching - HashSet
+Working of Hashmap
+What is singleton, how to break it.
+
+What is java8 feature
+Method reference,optional,lambda, functional interface, default & Static method, Intermediate and Terminal Operator, String::ValueOf 
+Advantages of Springboot.
+how to change Springboot Port
+What is @SpringBootApplication annotation
+Difference between @Controller and @RestController
+SteroType Annotation - @Component , @Service , @Repository , and @Controller
+what annotation use in springboot -  @SpringBootApplication, @EnableAutoConfiguration, @Configuration, @PathVariable, @RequestBody, @Autowired, @RestController, @Bean, @Component, @Repository
+
+Difference between Monolithic and Microservice architecture
+What is Microservice architecture
+what is starter in springboot dependency 
+how to start springboot project
+collection interface & Stream API
+How to create immutable class
+How to resolve conflicts
+What is workflow of Jenkins
+
+
+List<String> al=new ArrayList<>() - achieve the runtime polymorphism
+SOAP and Rest
+Method reference 
+utility of Springboot
+display none, display hidden
+private mathod in interface java 9
+peek() - Debugging the issue for lambda expression
+How to increase the performance of DB
+Sallow copy and Deep copy
+Characterstics/ feature of Rest API
+How Springboot connect to Database
+
+Hibernate - 
+Circuit breaker design pattern - Done
+Microservices with API Gateway - done
+Microservices with Hystrix/Resilience4J - done
+Microservices with Zipkin
+Microservices with Sleuth
+Microservices with Git Repo
+Microservices with Cloud Config
+Okta Auth to authenticate our API Gateway- 
+Feign Client - In progress
+
+Tools- Jenkins, Docker, Kubernates, Kafka
+Jenkins- Done
+Docker - Done
+Kafka - Done
+Kubernates - Inprogress
+AWS - 
+JPQL - Without queries
+
+Accenture:- Santatnu Bhattacharya
+Polymorshism
+Overloading and Overriding
+Differnece between List and Set
+How to create Immutable class
+Employee e1=new Employee(1); Employee e2=new Employee(1)
+Set<Employee> set=new Set();
+set.add(e1);
+set.add(e2);
+what is answer of set.size();  and e1.equals(e2);
+arr = {2,4,7,8,6}
+num= 7 find out the index 
+num=9 print no value find 
+Design pattern - Create Singleton class
+What are feature of Java8
+Optional class
+How to break singleton.
+Emplyee - id, age, salary
+findout average salary of whose age >25 and <30 using java8 - OptionalDouble avgSalary=al.stream().filter(ag-> ag.getAge()>25 && ag.getAge()<30).mapToInt(Employee::getSalary).average();
+Multithreading what is use.
+How to create Thread
+Emplyee - id, age, salary
+How to map in DB Employee_Tab , EMP_ID, EMP_AGE, EMP_Salary using Hibernate
+
+Cognizant:- Rajkumar
+
+Infosys:- Krupasindhu Sahoo & Siba Prasad Rath
+ObjectMapper
+Mapstruct
+restTemplate.exchange()
+If we have JSON value and object so how to create a bean class
+Difference between java.util.Date vs java.sql.Date
+
+EY:
+How you learn React if you were Java developer.
+Why you r looking another opportunity if you already offer
+what do mean by DSA- Array, Collection(Arraylist,HashMap,Set)
+Complaxcity of HashMap.
+Time and Space complexcity
+Time complexcity of Array.
+int arr[]={2,1,4,3,6,8,7,10} int target=13 - to find pair which are equal to 13
+
+
+
+Difference between Heap and Stack: 
+The main difference between heap memory and stack memory is that stack memory is used to store local variables and function calls while heap memory is used to store objects in Java. No matter where the object is created in code.
+
+So Thread objects stored in heap.
+Transient - 
+Volatile - 
+
+What if we call Java run() method directly instead start() method? -: Invoking the run() method from the main thread, the run() method goes onto the current call stack rather than at the beginning of a new call stack.
+
+join() method:- that permits one thread to wait until the other thread to finish its execution
+Syncronization - Ex: Book a ticket for movie.
+
+Java runtime throws ClassNotFoundException while trying to load a class at runtime only and the name was provided during runtime. In the case of NoClassDefFoundError, the class was present at compile time, but Java runtime could not find it in Java classpath during runtime.
+
+
+List<String> courses = List.of("Spring", "Spring Boot", "API" , "Microservices","AWS", "PCF","Azure", "Docker", "Kubernetes");
+List<String> al= courses.stream().filter(i->i.equals("Spring") ). Collectors(collect.toList)
+courses.stream().filter(i->i.equals("Spring") ).forEach(System.out::println);
+List<Integer> numbers = List.of(12, 9, 13, 4, 6, 2, 4, 12, 15);
+List<Integer> al= numbers.stream().filter(obj ->obj%2 !=0 ). Collectors(collect.toList)
+List<Integer> al= numbers.stream().map(i->i )
+correct -> al.stream().map(i->i).forEach(System.out::println);
+
+------------------JUnit
+
+Junit: The java programmer can create test cases and test his/her own code.It is one of the unit testing framework. Current version is junit 4.
+		To perform unit testing, we need to create test cases. The unit test case is a code which ensures that the program logic works as expected.
+
+Annotation:
+
+@Test annotation specifies that method is the test method.
+@BeforeClass annotation specifies that method will be invoked only once, before starting all the tests.
+@Before annotation specifies that method will be invoked before each test.
+@After annotation specifies that method will be invoked after each test.
+@AfterClass annotation specifies that method will be invoked only once, after finishing all the tests.
+
+
+Methods of Assert class: 
+void assertEquals(boolean expected,boolean actual): checks that two primitives/objects are equal. It is overloaded.
+void assertTrue(boolean condition): checks that a condition is true.
+void assertFalse(boolean condition): checks that a condition is false.
+void assertNull(Object obj): checks that object is null.
+void assertNotNull(Object obj): checks that object is not null.
+
+		
+Junit5 annotation:
+@ParametrizedTest
+@RepeatedTest
+@TestFactory
+@TestTemplate
+@BeforeEach
+@AfterEach
+@BeforeAll
+@AfterAll 
+
+spring boot, profile, actuator, swagger, Junit with 
+merge or commit
+Conflict: 
+accept Current changes --> our changes from master
+accept Incoming changes  --> It will check another  means change in another branch
+accept both --> both chnages
+
+you can change manually which one you want keep those changes after that
+master> git add index.html or git add .
+master> git status
+master> git commit -m "merge issue1"
+
+git branch -v --> tell last commit for all branch
+git branch --merged  --> tell the merged branch
+git branch --no-merged  --> tell the unmerged branch
+git rebase branchName  --> all 
+
+hOW TO RESOLVE : manually, if know the 3 changes  
+
+
+
+
+Ecospace and bannerkatta
+
+TCS:
+Asychronous call
+what is the Predicates
+future and completablefuture difference
+Springboot 3 and Java 17 feature
+for which property we can override the existing property 
+Without restart server and build how we can update the property in Prod
+what will be the Acceptance Criteria
+What tools are user for Code review - Snyk, CheckStyle
+What tools are used for Code quality - SonarQube
+
+
+citiusTech:
+
+what is Inheritance, Association and Composition
+type of Design pattern
+what design pattern used internally microservice
+is-a and assciation and aggregation
+Java 17 feature
+sealed classes
+why we used stream
+diffeence b/w execute() and submit() in multithreading
+what is MethodRequestException 
+Difference b/w Point and AdvicePoint
+Springboot annotation
+@NamedQuery
+which layer we need to write @NamedQuery
+Context
+How to do versioning in springboot
+Java 8 coding question
+how HashSet internally work 
+how HashMap internally work 
+what new feature come in HashMap
+Why props can't change
+call, apply and bind
+how to pass props
+how to pass props child to parent
+Syntatic and non-syntatic event
+Solid Principal
+Exception Handling in Springboot

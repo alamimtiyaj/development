@@ -1,0 +1,223 @@
+user-service 
+	port 8282
+	
+	user/101
+	
+contact-service 
+	port 9292	
+	
+	contact/user/101
+
+eserver
+	port 8761
+	http://localhost:8761/  - Eureka Server
+	http://localhost:8282/user/102
+
+apigateway
+	port 8989
+	http://localhost:8989/user/101
+
+hys-dashboard
+	port 9555
+
+configuration to run 2 microservices: 
+1. Go to Run configuration add your port there for different - different API.
+2. Open Boot Dashboard and run every API and when both are up then call you API.
+
+1st way to connect your API: 
+1. Create restTemplate method as a return type RestTemplate define as @Bean annotaion in User service main class.
+2. Create a variable for RestTemplate and autowired in user service controller class
+3. Get the User detail using below 
+	User user= this.userService.getUser(userid);
+4. Using restTemplate variable it will give getForObject(Url,class) using this will get contact detail
+	//http://localhost:9292/contact/user/1012
+		
+	List contacts = this.restTemplate.getForObject("http://localhost:9292/contact/user/" + 	user.getUserId(), List.class);
+	
+5.  After that we will set this contact in our User service
+	user.setContacts(contacts);
+6. Now we need run both API and call http://localhost:8282/user/102
+
+2nd way to connect your API using Eureka: default port- 8761
+Eureka server link : http://localhost:8761/
+1. Create new project for eureka server with port 8761 and Eureka Server dependency. and put @EnableEurekaServer annotation in main class of eureka server.
+2. Put below 2 property for don't register bydefault.	
+	eureka.client.register-with-eureka=false
+	eureka.client.fetch-registry=false
+
+3. Put Eureka client dependency in both service user and contact. and use @LoadBalanced annotation in your main class of user service. 
+4. For defining the Application use below property and add in both application.properties file
+	spring.application.name=user-service
+	spring.application.name=contact-service
+
+5. for defining the host as localhost use below property and add in all application.properties file
+	eureka.instance.hostname= localhost
+
+6. Now you can call with application name in url.
+	List contacts = this.restTemplate.getForObject("http://contact-service/contact/user/" + user.getUserId(), 	List.class);
+
+3rd way to call API using API gateway: 
+API Gateway: The API Gateway is a server. It is a single entry point into a system. API Gateway encapsulates the internal system architecture.
+It also has other responsibilities such as authentication, monitoring, load balancing, caching, request shaping and management, and static response handling.
+1. Create new project for API Gateway with port 8989 and Eureka client, Actuator, gateway dependency. and put @EnableEurekaClient annotation in main class of API Gateway.
+2. For defining the Application name and the host as localhost use below property.
+	spring.application.name=api-gateway
+	eureka.instance.hostname= localhost
+
+3. For configure the service for API Gateway use below property.
+	spring.cloud.gateway.routes[0].id=user-service
+	spring.cloud.gateway.routes[0].uri=lb://user-service
+	spring.cloud.gateway.routes[0].predicates[0].name=Path
+	spring.cloud.gateway.routes[0].predicates[0].args.pattern=/user/**
+
+4. Now you can run all services and use http://localhost:8989/user/101
+
+
+------------------------- Microservices with Hystrix
+Hystrix: Hystrix is fault tolerance liberaray.
+	Hystrix is a liberary developed by Netflix and is part of Spring via Spring cloud Netflix project.
+	Hystrix can used in situation where your application depends on remote server.
+	Provide callback method.
+
+Fault Tolrance: If you have 4 microservices M1,M2,M3,M4 and M1 depends --> M2 or M4 so in this case failure will come.
+Circuit Breaker: It work based on state: 3 state are IMP
+	1. Open: If Service is down.
+	2. Close: If one service is running and other service is depends on 1st, so 1st one will request based on threshold(no. of time) if he did not get 	any response so that service will go from Close state to Open state means 2nd service is down.
+	3. Half-Open: Open state will go in Half-Open state after the given amount of time(ex: after 10 sec) and it will request few times if the high  	success rate(more then 50% or threshold) will get the it move into Close state from Half-Open state. If get Less success factor/more failure the it 	move into Open State.
+	4. Disable
+	5. Forced_Open
+Count-Based Sliding Window:
+Time-Based Sliding Window:
+How to do we implement: Add the dependency(Netflix-hystrix) and Configuration
+Hystrix Dashboard: The Hystrix Dashboard allows you to monitor Hystrix metrics in real time.
+
+Steps: 
+1. cloud Netflix-hystrix dependency add in API gateway
+2. Add the properties file for Fallback
+	filters:
+            - name: CircuitBreaker
+              args:
+                name: user-service
+                fallbackuri: forward:/userServiceFallback
+3. Add another properties for timeout for 5 second
+	hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillieseconds: 5000
+4. add properties file 
+	management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+5. Create another package controller and create class FallbackController and make method userServiceFallback() & contactServiceFallback() below same as
+	@GetMapping("/userServiceFallback")
+    public String userServiceFallback() {
+        return "User service is down at this time !!";
+    }
+6. Add annotation @EnableHystrix in main class ApigatewayApplication.
+7. Create another project hys-dashboard.
+8. Add dependency for Hystrix dashboard and Eureka client and dependency management.
+	Spring-cloud-starter-netflix-hystrix-dashboard
+9. Enable in Hystrix dashboard main class @EnableEurekaClient & @EnableHystrixDashboard
+10. change port of Hystrix dashboard project 9555 and give application name and allow proxy stream
+	Spring.application.name= hystrix-dashboard
+	hystrix.dashboard.proxy-stream-allow-list="*"
+11. After that run all services
+	localhost:8989/actuator/hystrix.stream
+	localhost:9555/hystrix  - Hystrix dashboard will open
+	give this url localhost:8989/actuator/hystrix.stream to Hystrix dashboard and monitor stream
+Now you can call your any service using API gateway or directly contact service.
+http://localhost:9292/contact/user/101
+
+Note: If your user service down then your userFallbackservice will return and in hystrix dashboard will show 100% error.
+
+
+------------------------------ Circuit Breaker using Resilience4J
+Module: 
+1. Resilience4J
+2. Retry : If your service is UP but its slow so you can try RETRY().
+3. Rate Limiter: This functionality allows limiting access to some service.
+	Rate Limiter make services highly available by limiting the number of calls we could process in specific windows.
+	Advantage: Security and Performance
+	3 Terms: RPS,RPM,RPH (Request per second/Minut/Hour)
+
+
+1. Add dependency Resilience4J : resilience4j-spring-boot2, spring-boot-starter-aop and spring-boot-starter-actuator
+2. Use @CircuitBreaker(name="ratingHotelBreaker", fallbackmethod="ratingHotelFallback")
+3. Add property in application.properties
+	management
+		health:
+			circuitbreakers:
+				enable: true
+		endpoints:
+			web:
+				exposure:
+					include: health
+				
+		endpoints:
+			 health:
+				show-detail: always
+
+resilience4j:
+	circuitbreaker:
+		instance:
+			ratingHotelBreaker:
+				registerHealthIndicator: true
+				eventConsumerBufferSize: 10
+				failureRateThreshold: 50
+				minimumNumberOfCalls: 5
+				automaticTransitionfromOpenToHalfOpenEnabled: true
+				waitDurationInOpenState: 6s
+				permittedNumberOfCallsInHalfOpenState: 3
+				slidingWindowSize: 10
+				slidingWindowType: COUNT_BASED
+				
+						
+RETRY:  
+1. @Retry(name="ratingHotelService",fallbackmethod="ratingHotelFallback" )
+2. take on variable retryCount=1 and keep in fallbackmethod & increment the retryCount++ just for check how many times we tried
+3. add properties in file
+	resilience4j:
+	circuitbreaker:
+		retry
+			instance:
+				ratingHotelService:
+					max-attempts: 3
+					wait-duration: 5s
+					
+Rate Limiter: This fuctionality allows limiting access to some service. In Particular timeframe you will request the no of arguments.
+	Rate Limiter make services highly available by limiting the number of calls we could process in specific windows.
+Advantage: Security, Performance
+
+1. @RateLimiter(name="userRateLimiter",fallbackmethod="ratingHotelFallback" )
+2. add properties in file
+	resilience4j:
+	circuitbreaker:
+		ratelimiter:
+			instances:
+				userRateLimiter:
+					limit-refresh-period: 4s
+					limit-for-period: 2
+					timeout-duartion: 0s
+					
+3. Using Jmeter you can test your RateLimiter
+
+------------------------Feign Client
+Source code: https://github.com/LearnCodeWithDurgesh/Microservices-Tutorial-Series
+
+Feign Client: The Feign is a decrative HTTP Web client developed by Netflix.
+If you want to use Feign, Create an Interface and annotate it.
+
+dependency: Add in User Service - OpenFeign- starter-openfeign
+
+1. Add @EnableFeignClient in main class of User Service 
+2. Create an interface HotelService in your User Service and use annotation @FeignClient(name= "HOTEL-SERVICE") and get your record from Hotel Service using @GetMapping.
+3. Autowird the HotelService in your User Service
+	@Autowired
+	private HotelService hotelService
+4. Instead of restTemplate we will use Feign client.
+	Hotel hotel= hotelService.getHotel(rating.getHotelId());
