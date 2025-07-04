@@ -1,1 +1,42 @@
+Garbage collection
+Finallized()
+which algorithm is used for garbage collection in java: mark and sweep, mark compact, generational copying
+How can memory leak occurs in Java even we have automatic GC- Occurs when object is no longer needed but still referenced from other reachable object and hence preventing the garbage collector from reclaming their memory so thats why memory leak occurs
+Is Java 100% object oriented Programming language- no, ther is primitive data type & wrapper
+Adavtage of partially object oriented Programming language - bcz of primitive data type run faster & use less memory if you compare classes & full integers
+Use of object oriented Programming language- create the instance of the class by mkaing use of the obeject
+What is Singleton class & how we can create - 
+what is the role of finally and static in Singleton class- 
+Is Singleton class thread safe - by default it is not thread safe but we can make 
+how to prevent thread safe Singleton class -
+Immutable in java - 
+why immutability objects are useful for concurrent programming - 
+what is the immutable class - String but not Stringbuffer & Stringbuilder
+how to create immutable class in String -
+What is functional interface - 
+Can functional extend another interface - yes, but 
+can we create a server java application without creating Spring or any other frmework - yes, we can use SC apis like server socket class & TCP server or HTTP class HTTP server
+diff b/w RestController and controller-
+when we preffer RestController and controller-
+Is it possible to combine controller and RestController annotation functionality- yes in controller class, you can use response body on a speific method to acheive RestController
+How AutoConfiguation play important role in springboot 
+Can we customize the specific AutoConfiguation Springboot & how - yes, to define in properties/yml file
+how we can disable specific AutoConfiguation class in springboot - to exclude the attribute
+Whats your deployment strategies in your current Project - 
+which git version you have used - github
+what is git clone, pull and fetch - 
+How to manage merge conflicts - 
+have you use Tortise git - 
+Can you explain the rebase process and its advantages -
+Which editor have you used -
+How we can optimize the maven build for large project - using Docker
+Maven lifecycle and phases - 
+diff b/w Maven clean & install - 
+Can you tell what other than Tomcat server provide by springboot - Jetty and Jboss
+how we can disable the Tomcat server - 
+which version is using for spring/Springboot/java - 
+
+
+
+
 
